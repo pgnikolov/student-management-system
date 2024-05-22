@@ -1,7 +1,7 @@
 import requests
 
 
-def get_studensts_data():
+def get_students_data():
     """
     Get the students recordet data from Google Sheets with sheety.co API
     Args:
@@ -24,7 +24,7 @@ def add_student(new_student: dict):
     - grade (float): The grade of the student.
     - subjects (list of str): The subjects the student is enrolled in.
     """
-    students_data = get_studensts_data()
+    students_data = get_students_data()
 
     # Check for existing student with the same name (assuming name is unique)
     for student in students_data:
@@ -49,15 +49,92 @@ def add_student(new_student: dict):
         print(f"Error adding student: {response.text}")
 
 
+def update_subjects(student_data):
+    """
+    Updates the subjects field for a student.
+
+    Args:
+        student_data (dict): A dictionary containing student data, including the "subjects" field.
+
+    Returns:
+        None
+    """
+
+    # Get the current subjects
+    current_subjects = student_data.get("subjects", [])  # Handle missing "subjects" key
+
+    # Prompt user for updated subjects
+    while True:
+        new_subjects_str = input(f"Update subjects (current: {' ,'.join(current_subjects)}): ")
+        new_subjects = [subject.strip().upper() for subject in new_subjects_str.split(",") if subject.strip()]
+
+        # Check for changes (avoid unnecessary updates)
+        if new_subjects != current_subjects:
+            student_data["subjects"] = new_subjects
+            print("Subjects updated successfully.")
+            return
+        else:
+            print("No changes made to subjects.")
+
+
 def update_student(name):
     """
-    Update an existing student record.
+    Updates an existing student record.
+
     Args:
-    - name (str): The name of the student whose record is to be updated.
+        name (str): The name of the student whose record is to be updated.
+
+    Returns:
+        bool: True if the student was updated successfully, False otherwise.
     """
-    # Check if the student exists
-    # Prompt the user to update fields and keep current values if fields are empty
-    # Code to update the student's record
+
+    students_data = get_students_data()
+    student_to_update = None
+
+    # Find the student with the matching name
+    for student in students_data:
+        if student["name"] == name:
+            student_to_update = student
+            break
+
+    # Check if student exists
+    if not student_to_update:
+        print(f"Student with name '{name}' not found.")
+        return False
+
+    # Prompt user for updates (assuming basic input functions)
+    updated_fields = {}
+    for field in student_to_update.keys():
+        if field not in ("id", "name"):
+            current_value = student_to_update[field]
+            new_value = None
+
+            if field == "grade":
+                new_value = input(f"Update grade (current: {current_value}): ")
+
+            else:
+                new_value = input(f"Update {field} (current: {current_value}): ")
+                if new_value:
+                    new_value = new_value.strip().upper()  # Remove whitespaces, convert to uppercase (optional)
+                    updated_fields[field] = new_value.split(",")  # Split the validated input into a list
+
+            if new_value:
+                updated_fields[field] = new_value
+    # Update student data (assuming you have logic to update data in Sheety)
+    if updated_fields:
+        url = 'https://api.sheety.co/283e4374599ecb7c462c0903b64b4b25/students/students'
+        student_data = {"student": {**student_to_update, **updated_fields}}  # Update existing data with changes
+
+        response = requests.put(url + "/" + str(student_to_update["id"]), json=student_data)
+        if response.status_code == 200:
+            print("Student record updated successfully!")
+            return True
+        else:
+            print(f"Error updating student: {response.text}")
+            return False
+    else:
+        print("No changes made to student record.")
+        return True  # Consider returning False here if no updates were made
 
 
 def delete_student(name):
