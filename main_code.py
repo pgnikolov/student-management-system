@@ -19,15 +19,7 @@ def main():
         choice = input("Enter your choice: ")
 
         if choice == '1':
-            # Prompt for student details
-            name = input("Enter student's name: ")
-            surname = input("Enter student's surname: ")
-            age = int(input("Enter student's age: "))
-            grade = float(input("Enter student's grade: "))
-            subjects = input("Enter student's subjects (comma-separated): ").split(',')
-            new_student = {'name': name, 'surname': surname, 'age': age, 'grade': grade, 'subjects': subjects}
-            # Call the add_student function
-            st.add_student(new_student)
+            st.add_student()
         elif choice == '2':
             # Prompt for student name to update
             name = input("Enter student's name to update: ")
