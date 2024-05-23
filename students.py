@@ -16,15 +16,18 @@ def get_students_data():
     return data
 
 
-def add_student(new_student: dict):
+def add_student():
     """
     Add a new student record.
-    Args:
-    - name (str): The name of the student.
-    - age (int): The age of the student.
-    - grade (float): The grade of the student.
-    - subjects (list of str): The subjects the student is enrolled in.
     """
+    name = input("Enter student's name: ")
+    surname = input("Enter student's surname: ")
+    age = int(input("Enter student's age: "))
+    grade = float(input("Enter student's grade: "))
+    subjects = input("Enter student's subjects (comma-separated): ")
+    new_student = {'name': name, 'surname': surname, 'age': age, 'grade': grade,
+                   'subjects': subjects}
+
     data = get_students_data()
 
     # Check for existing student with the same name
@@ -38,6 +41,7 @@ def add_student(new_student: dict):
         next_id = max(student['id'] for student in data) + 1
 
     # Create a new dictionary with the next ID(row)
+    new_student['id'] = next_id
     data_to_send = {"student": new_student}
     response = requests.post(url, json=data_to_send)
 
