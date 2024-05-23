@@ -137,14 +137,25 @@ def update_student(name):
         return True
 
 
-def delete_student(name):
+def delete_student(name: str):
     """
     Delete a student record based on the student's name.
     Args:
     - name (str): The name of the student to delete.
     """
+    data = get_students_data()
+
     # Check if the student exists
-    # Code to delete the student's record
+    for student in data:
+        if student['name'] == name:
+            url = f'https://api.sheety.co/283e4374599ecb7c462c0903b64b4b25/students/students/{student["id"]}'
+            response = requests.delete(url)
+            if response.status_code == 204:
+                print(f"Student '{name}' deleted successfully!")
+            else:
+                print(f"Error deleting student '{name}': {response.text}")
+            return
+    print(f"Student '{name}' not found.")
 
 
 def search_student(name):
