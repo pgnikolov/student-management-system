@@ -175,5 +175,12 @@ def list_all_students():
     """
     List all student records.
     """
-    # Check if there are any student records
-    # Code to list all students
+    data = get_students_data()
+
+    if len(data) == 0:
+        print("No student records found.")
+    else:
+        # Print all student records
+        for student in data:
+            print(f"Name: {student['name']}, Surname: {student['surname']}\n"
+                  f"Age: {student['age']}\nGrade: {student['grade']}\nSubjects: {student['subjects']}\n")
