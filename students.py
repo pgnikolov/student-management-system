@@ -1,5 +1,7 @@
 import requests
 
+url = 'https://api.sheety.co/283e4374599ecb7c462c0903b64b4b25/students/students'
+
 
 def get_students_data():
     """
@@ -7,7 +9,6 @@ def get_students_data():
     Args:
         No args
     """
-    url = 'https://api.sheety.co/283e4374599ecb7c462c0903b64b4b25/students/students'
     response = requests.get(url)
     r = response.json()
     data = r["students"]
@@ -38,8 +39,6 @@ def add_student(new_student: dict):
 
     # Create a new dictionary with the next ID(row)
     data_to_send = {"student": new_student}
-
-    url = 'https://api.sheety.co/283e4374599ecb7c462c0903b64b4b25/students/students'
     response = requests.post(url, json=data_to_send)
 
     # Check for successful addition
@@ -122,7 +121,7 @@ def update_student(name):
                 updated_fields[field] = new_value
     # Update student data (assuming you have logic to update data in Sheety)
     if updated_fields:
-        url = 'https://api.sheety.co/283e4374599ecb7c462c0903b64b4b25/students/students'
+
         data = {"student": {**student_to_update, **updated_fields}}  # Update existing data with changes
 
         response = requests.put(url + "/" + str(student_to_update["id"]), json=data)
@@ -148,8 +147,8 @@ def delete_student(name: str):
     # Check if the student exists
     for student in data:
         if student['name'] == name:
-            url = f'https://api.sheety.co/283e4374599ecb7c462c0903b64b4b25/students/students/{student["id"]}'
-            response = requests.delete(url)
+            url_check = f'{url}{student["id"]}'
+            response = requests.delete(url_check)
             if response.status_code == 204:
                 print(f"Student '{name}' deleted successfully!")
             else:
@@ -158,14 +157,18 @@ def delete_student(name: str):
     print(f"Student '{name}' not found.")
 
 
-def search_student(name):
+def search_student(name: str):
     """
     Search for a student by name and return their record.
     Args:
     - name (str): The name of the student to search for.
     """
     # Check if the student exists
-    # Code to return the student's record
+    data = get_students_data()
+    for student in data:
+        if student['name'] == name:
+            return student
+    return None
 
 
 def list_all_students():
