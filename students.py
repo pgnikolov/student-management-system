@@ -167,7 +167,8 @@ def search_student(name: str):
     data = get_students_data()
     for student in data:
         if student['name'] == name:
-            return student
+            return (f"Name: {student['name']} Surname: {student['surname']}\n"
+                    f"Age: {student['age']}\nGrade: {student['grade']}\nSubjects: {student['subjects']}")
     return None
 
 
