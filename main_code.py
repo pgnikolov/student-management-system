@@ -21,11 +21,13 @@ def main():
         if choice == '1':
             # Prompt for student details
             name = input("Enter student's name: ")
+            surname = input("Enter student's surname: ")
             age = int(input("Enter student's age: "))
             grade = float(input("Enter student's grade: "))
             subjects = input("Enter student's subjects (comma-separated): ").split(',')
+            new_student = {'name': name, 'surname': surname, 'age': age, 'grade': grade, 'subjects': subjects}
             # Call the add_student function
-            st.add_student(name, age, grade, subjects)
+            st.add_student(new_student)
         elif choice == '2':
             # Prompt for student name to update
             name = input("Enter student's name to update: ")
@@ -40,7 +42,7 @@ def main():
             # Prompt for student name to search
             name = input("Enter student's name to search: ")
             # Call the search_student function
-            st.search_student(name)
+            print(st.search_student(name))
         elif choice == '5':
             # Call the list_all_students function
             st.list_all_students()
@@ -53,3 +55,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
