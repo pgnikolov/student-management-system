@@ -9,10 +9,10 @@ def get_students_data():
     """
     url = 'https://api.sheety.co/283e4374599ecb7c462c0903b64b4b25/students/students'
     response = requests.get(url)
-    data = response.json()
-    students_data = data["students"]
+    r = response.json()
+    data = r["students"]
 
-    return students_data
+    return data
 
 
 def add_student(new_student: dict):
@@ -24,19 +24,19 @@ def add_student(new_student: dict):
     - grade (float): The grade of the student.
     - subjects (list of str): The subjects the student is enrolled in.
     """
-    students_data = get_students_data()
+    data = get_students_data()
 
-    # Check for existing student with the same name (assuming name is unique)
-    for student in students_data:
+    # Check for existing student with the same name
+    for student in data:
         if student['name'] == new_student['name']:
             print(f"Student {student['name']} already exists")
             return  # Exit function if duplicate found
     # Find the next free row id show number of the row in response
     next_id = 1
-    if students_data:
-        next_id = max(student['id'] for student in students_data) + 1
+    if data:
+        next_id = max(student['id'] for student in data) + 1
 
-    # Create a new dictionary with the next ID
+    # Create a new dictionary with the next ID(row)
     data_to_send = {"student": new_student}
 
     url = 'https://api.sheety.co/283e4374599ecb7c462c0903b64b4b25/students/students'
@@ -49,19 +49,19 @@ def add_student(new_student: dict):
         print(f"Error adding student: {response.text}")
 
 
-def update_subjects(student_data):
+def update_subjects(data):
     """
     Updates the subjects field for a student.
 
     Args:
-        student_data (dict): A dictionary containing student data, including the "subjects" field.
+        data (dict): A dictionary containing student data, including the "subjects" field.
 
     Returns:
         None
     """
 
     # Get the current subjects
-    current_subjects = student_data.get("subjects", [])  # Handle missing "subjects" key
+    current_subjects = data.get("subjects", [])
 
     # Prompt user for updated subjects
     while True:
@@ -70,7 +70,7 @@ def update_subjects(student_data):
 
         # Check for changes (avoid unnecessary updates)
         if new_subjects != current_subjects:
-            student_data["subjects"] = new_subjects
+            data["subjects"] = new_subjects
             print("Subjects updated successfully.")
             return
         else:
@@ -88,11 +88,11 @@ def update_student(name):
         bool: True if the student was updated successfully, False otherwise.
     """
 
-    students_data = get_students_data()
+    data = get_students_data()
     student_to_update = None
 
     # Find the student with the matching name
-    for student in students_data:
+    for student in data:
         if student["name"] == name:
             student_to_update = student
             break
@@ -123,9 +123,9 @@ def update_student(name):
     # Update student data (assuming you have logic to update data in Sheety)
     if updated_fields:
         url = 'https://api.sheety.co/283e4374599ecb7c462c0903b64b4b25/students/students'
-        student_data = {"student": {**student_to_update, **updated_fields}}  # Update existing data with changes
+        data = {"student": {**student_to_update, **updated_fields}}  # Update existing data with changes
 
-        response = requests.put(url + "/" + str(student_to_update["id"]), json=student_data)
+        response = requests.put(url + "/" + str(student_to_update["id"]), json=data)
         if response.status_code == 200:
             print("Student record updated successfully!")
             return True
@@ -134,7 +134,7 @@ def update_student(name):
             return False
     else:
         print("No changes made to student record.")
-        return True  # Consider returning False here if no updates were made
+        return True
 
 
 def delete_student(name):
