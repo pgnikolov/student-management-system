@@ -21,11 +21,20 @@ def main():
         if choice == '1':
             st.add_student()
         elif choice == '2':
-            st.update_student()
+            first_name = input("Enter the first name of the student to update: ").capitalize()
+            last_name = input("Enter the last name of the student to update: ").capitalize()
+            name = f"{first_name} {last_name}"  # Use full name as the key
+            st.update_student(name)
         elif choice == '3':
-            st.delete_student()
+            first_name = input("Enter the first name of the student to update: ").capitalize()
+            last_name = input("Enter the last name of the student to update: ").capitalize()
+            name = f"{first_name} {last_name}"  # Use full name as the key
+            st.delete_student(name)
         elif choice == '4':
-            st.search_student()
+            first_name = input("Enter the first name of the student to update: ").capitalize()
+            last_name = input("Enter the last name of the student to update: ").capitalize()
+            name = f"{first_name} {last_name}"  # Use full name as the key
+            st.search_student(name)
         elif choice == '5':
             st.list_all_students()
         elif choice == '6':
