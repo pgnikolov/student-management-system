@@ -27,7 +27,7 @@ def add_student():
         json.dump(students, f)
 
 
-def update_student():
+def update_student(name):
     """
     Updates the information of an existing student in the students.json file.
     update specific fields (first name, last name, age, sex, email)
@@ -37,12 +37,8 @@ def update_student():
     with open('students.json', 'r') as f:
         students = json.load(f)
 
-    first_name = input("Enter the first name of the student to update: ").capitalize()
-    last_name = input("Enter the last name of the student to update: ").capitalize()
-    key = f"{first_name} {last_name}"  # Use full name as the key
-
-    if key not in students:
-        print(f"Student with name '{key}' not found.")
+    if name not in students:
+        print(f"Student with name '{name}' not found.")
 
     updated_fields = {}  # Dictionary to store updated information
 
@@ -53,7 +49,7 @@ def update_student():
         if field_to_update == 'q':
             break
 
-        if field_to_update not in students[key]:
+        if field_to_update not in students[name]:
             print(f"Invalid field: '{field_to_update}'. Valid fields are: first_name, last_name, age, sex, email.")
             continue
 
@@ -69,16 +65,16 @@ def update_student():
         continue
 
     # Update the student's information with the collected data
-    students[key].update(updated_fields)
+    students[name].update(updated_fields)
 
     # Save the updated students data to the JSON filea
     with open('students.json', 'w') as f:
         json.dump(students, f, indent=4)
 
-    print(f"Student information for '{key}' updated successfully!")
+    print(f"Student information for '{name}' updated successfully!")
 
 
-def delete_student():
+def delete_student(name):
     """
     Deletes a student's information from the students.json file.
 
@@ -86,21 +82,16 @@ def delete_student():
 
     with open('students.json', 'r') as f:
         students = json.load(f)
-    first_name = input("Enter the first name of the student to delete: ").capitalize()
-    last_name = input("Enter the last name of the student to delete: ").capitalize()
-    full_name = f"{first_name} {last_name}"  # Use full name as the key for simplicity
 
-    key = f"{full_name}"  # Use full name as the key
-
-    if key not in students:
-        print(f"Student with name '{full_name}' not found.")
+    if name not in students:
+        print(f"Student with name '{name}' not found.")
         return  # Exit the function if student not found
 
-    confirmation = input(f"Are you sure you want to delete student '{full_name}' (y/n): ").lower()
+    confirmation = input(f"Are you sure you want to delete student '{name}' (y/n): ").lower()
 
     if confirmation == 'y':
-        del students[key]  # Remove student data using del
-        print(f"Student '{full_name}' deleted successfully!")
+        del students[name]  # Remove student data using del
+        print(f"Student '{name}' deleted successfully!")
 
         # Save the updated students data to the JSON file
         with open('students.json', 'w') as f:
@@ -110,22 +101,18 @@ def delete_student():
         print("Deletion cancelled.")
 
 
-def search_student():
+def search_student(name):
     with open('students.json', 'r') as f:
         students = json.load(f)
 
-    first_name = input("Enter the first name of the student: ").capitalize()
-    last_name = input("Enter the last name of the student: ").capitalize()
-    full_name = f"{first_name} {last_name}"
-    key = f"{full_name}"  # Use full name as the key for simplicity
-    if key in students:
-        student_info = students[key]
+    if name in students:
+        student_info = students[name]
         # Print student information
         print("Student Information:")
         for field, value in student_info.items():
             print(f"{field}: {value}")
     else:
-        print(f"Student with name '{full_name}' not found.")
+        print(f"Student with name '{name}' not found.")
 
 
 def list_all_students():
