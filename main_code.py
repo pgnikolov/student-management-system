@@ -21,22 +21,12 @@ def main():
         if choice == '1':
             st.add_student()
         elif choice == '2':
-            # Prompt for student name to update
-            name = input("Enter student's name to update: ")
-            # Call the update_student function
-            st.update_student(name)
+            st.update_student()
         elif choice == '3':
-            # Prompt for student name to delete
-            name = input("Enter student's name to delete: ")
-            # Call the delete_student function
-            st.delete_student(name)
+            st.delete_student()
         elif choice == '4':
-            # Prompt for student name to search
-            name = input("Enter student's name to search: ")
-            # Call the search_student function
-            print(st.search_student(name))
+            st.search_student()
         elif choice == '5':
-            # Call the list_all_students function
             st.list_all_students()
         elif choice == '6':
             # Exit the program
