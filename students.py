@@ -11,20 +11,34 @@ def add_student():
     sex = input("Enter the sex of the student (Male/Female): ").capitalize()
     email = input("Enter the email of the student: ").lower()
 
-    key = f"{first_name} {last_name}"
-    students[key] = {
-        "first_name": first_name,
-        "last_name": last_name,
-        "age": age,
-        "sex": sex,
-        "email": email
-    }
+    # Create an empty dictionary for subjects and grades
+    subjects = {}
 
+    while True:
+        add_subject = input("Add a subject (y/n)?: ").lower()
+        if add_subject != 'y':
+            break
+        subject = input("Enter subject name: ")
+        grade = float(input(f"Enter grade for {subject}: "))
+        subjects[subject] = grade
+
+        # Create the student information dictionary
+        student_info = {
+            "first_name": first_name,
+            "last_name": last_name,
+            "age": age,
+            "sex": sex,
+            "email": email,
+            "subjects": subjects
+        }
+    # Add the student information to the main students dictionary
+    students[f"{first_name} {last_name}"] = student_info
     print("Student added successfully!")
 
-    # Save the updated students to the JSON file
     with open('students.json', 'w') as f:
-        json.dump(students, f)
+        json.dump(students, f, indent=4)
+
+    print("Student added successfully!")
 
 
 def update_student(name):
