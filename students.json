@@ -4,13 +4,35 @@
         "last_name": "Ivanov",
         "age": 18,
         "sex": "Male",
-        "email": "vankata@abv.bg"
+        "email": "vankata@abv.bg",
+        "subjects": {
+            "Math": 5.75,
+            "Science": 5.0,
+            "English": 6.0
+        }
     },
     "Plamen Nikoloc": {
         "first_name": "Plamen",
         "last_name": "Nikoloc",
         "age": 19,
         "sex": "male",
-        "email": "dpdpd@dwd"
+        "email": "dpdpd@dwd",
+        "subjects": {
+            "Math": 5.75,
+            "Science": 4.5,
+            "English": 5.0
+        }
+    },
+    "Manuela Kasarova": {
+        "first_name": "Manuela",
+        "last_name": "Kasarova",
+        "age": 18,
+        "sex": "F",
+        "email": "kasr@abv.bg",
+        "subjects": {
+            "Math": 6.0,
+            "Art": 5.78,
+            "Biology": 5.0
+        }
     }
 }
