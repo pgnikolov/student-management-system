@@ -1,191 +1,150 @@
-import requests
-
-url = 'https://api.sheety.co/283e4374599ecb7c462c0903b64b4b25/students/students'
-
-
-def get_students_data():
-    """
-    Get the students recordet data from Google Sheets with sheety.co API
-    Args:
-        No args
-    """
-    response = requests.get(url)
-    r = response.json()
-    data = r["students"]
-
-    return data
+import json
 
 
 def add_student():
+    with open('students.json', 'r') as f:
+        students = json.load(f)
+
+    first_name = input("Enter the first name of the student: ").capitalize()
+    last_name = input("Enter the last name of the student: ").capitalize()
+    age = int(input("Enter the age of the student: "))
+    sex = input("Enter the sex of the student (Male/Female): ").capitalize()
+    email = input("Enter the email of the student: ").lower()
+
+    key = f"{first_name} {last_name}"
+    students[key] = {
+        "first_name": first_name,
+        "last_name": last_name,
+        "age": age,
+        "sex": sex,
+        "email": email
+    }
+
+    print("Student added successfully!")
+
+    # Save the updated students to the JSON file
+    with open('students.json', 'w') as f:
+        json.dump(students, f)
+
+
+def update_student():
     """
-    Add a new student record.
-    """
-    name = input("Enter student's name: ")
-    surname = input("Enter student's surname: ")
-    age = int(input("Enter student's age: "))
-    grade = float(input("Enter student's grade: "))
-    subjects = input("Enter student's subjects (comma-separated): ")
-    new_student = {'name': name, 'surname': surname, 'age': age, 'grade': grade,
-                   'subjects': subjects}
+    Updates the information of an existing student in the students.json file.
+    update specific fields (first name, last name, age, sex, email)
 
-    data = get_students_data()
-
-    # Check for existing student with the same name
-    for student in data:
-        if student['name'] == new_student['name']:
-            print(f"Student {student['name']} already exists")
-            return  # Exit function if duplicate found
-    # Find the next free row id show number of the row in response
-    next_id = 1
-    if data:
-        next_id = max(student['id'] for student in data) + 1
-
-    # Create a new dictionary with the next ID(row)
-    new_student['id'] = next_id
-    data_to_send = {"student": new_student}
-    response = requests.post(url, json=data_to_send)
-
-    # Check for successful addition
-    if response.status_code == 200:
-        print("Student added successfully!")
-    else:
-        print(f"Error adding student: {response.text}")
-
-
-def update_subjects(data):
-    """
-    Updates the subjects field for a student.
-
-    Args:
-        data (dict): A dictionary containing student data, including the "subjects" field.
-
-    Returns:
-        None
     """
 
-    # Get the current subjects
-    current_subjects = data.get("subjects", [])
+    with open('students.json', 'r') as f:
+        students = json.load(f)
 
-    # Prompt user for updated subjects
+    first_name = input("Enter the first name of the student to update: ").capitalize()
+    last_name = input("Enter the last name of the student to update: ").capitalize()
+    key = f"{first_name} {last_name}"  # Use full name as the key
+
+    if key not in students:
+        print(f"Student with name '{key}' not found.")
+
+    updated_fields = {}  # Dictionary to store updated information
+
     while True:
-        new_subjects_str = input(f"Update subjects (current: {' ,'.join(current_subjects)}): ")
-        new_subjects = [subject.strip().upper() for subject in new_subjects_str.split(",") if subject.strip()]
+        field_to_update = input(
+            "Enter the field to update (first_name, last_name, age, sex, email, or 'q' to quit): ").lower()
 
-        # Check for changes (avoid unnecessary updates)
-        if new_subjects != current_subjects:
-            data["subjects"] = new_subjects
-            print("Subjects updated successfully.")
-            return
-        else:
-            print("No changes made to subjects.")
-
-
-def update_student(name):
-    """
-    Updates an existing student record.
-
-    Args:
-        name (str): The name of the student whose record is to be updated.
-
-    Returns:
-        bool: True if the student was updated successfully, False otherwise.
-    """
-
-    data = get_students_data()
-    student_to_update = None
-
-    # Find the student with the matching name
-    for student in data:
-        if student["name"] == name:
-            student_to_update = student
+        if field_to_update == 'q':
             break
 
-    # Check if student exists
-    if not student_to_update:
-        print(f"Student with name '{name}' not found.")
-        return False
+        if field_to_update not in students[key]:
+            print(f"Invalid field: '{field_to_update}'. Valid fields are: first_name, last_name, age, sex, email.")
+            continue
 
-    # Prompt user for updates (assuming basic input functions)
-    updated_fields = {}
-    for field in student_to_update.keys():
-        if field not in ("id", "name"):
-            current_value = student_to_update[field]
-            new_value = None
+        if field_to_update == 'age':
+            new_value = int(input(f"Enter the new value for {field_to_update}: "))
+            if new_value < 0:
+                print("Age cannot be negative.")
+                print(f"Invalid input for '{field_to_update}'. Please enter a valid value.")
 
-            if field == "grade":
-                new_value = input(f"Update grade (current: {current_value}): ")
+        new_value = input(f"Enter the new value for {field_to_update}: ")
+        updated_fields[field_to_update] = new_value
 
-            else:
-                new_value = input(f"Update {field} (current: {current_value}): ")
-                if new_value:
-                    new_value = new_value.strip().upper()  # Remove whitespaces, convert to uppercase (optional)
-                    updated_fields[field] = new_value.split(",")  # Split the validated input into a list
+        continue
 
-            if new_value:
-                updated_fields[field] = new_value
-    # Update student data (assuming you have logic to update data in Sheety)
-    if updated_fields:
+    # Update the student's information with the collected data
+    students[key].update(updated_fields)
 
-        data = {"student": {**student_to_update, **updated_fields}}  # Update existing data with changes
+    # Save the updated students data to the JSON filea
+    with open('students.json', 'w') as f:
+        json.dump(students, f, indent=4)
 
-        response = requests.put(url + "/" + str(student_to_update["id"]), json=data)
-        if response.status_code == 200:
-            print("Student record updated successfully!")
-            return True
-        else:
-            print(f"Error updating student: {response.text}")
-            return False
+    print(f"Student information for '{key}' updated successfully!")
+
+
+def delete_student():
+    """
+    Deletes a student's information from the students.json file.
+
+    """
+
+    with open('students.json', 'r') as f:
+        students = json.load(f)
+    first_name = input("Enter the first name of the student to delete: ").capitalize()
+    last_name = input("Enter the last name of the student to delete: ").capitalize()
+    full_name = f"{first_name} {last_name}"  # Use full name as the key for simplicity
+
+    key = f"{full_name}"  # Use full name as the key
+
+    if key not in students:
+        print(f"Student with name '{full_name}' not found.")
+        return  # Exit the function if student not found
+
+    confirmation = input(f"Are you sure you want to delete student '{full_name}' (y/n): ").lower()
+
+    if confirmation == 'y':
+        del students[key]  # Remove student data using del
+        print(f"Student '{full_name}' deleted successfully!")
+
+        # Save the updated students data to the JSON file
+        with open('students.json', 'w') as f:
+            json.dump(students, f, indent=4)
+
     else:
-        print("No changes made to student record.")
-        return True
+        print("Deletion cancelled.")
 
 
-def delete_student(name: str):
-    """
-    Delete a student record based on the student's name.
-    Args:
-    - name (str): The name of the student to delete.
-    """
-    data = get_students_data()
+def search_student():
+    with open('students.json', 'r') as f:
+        students = json.load(f)
 
-    # Check if the student exists
-    for student in data:
-        if student['name'] == name:
-            url_check = f'{url}{student["id"]}'
-            response = requests.delete(url_check)
-            if response.status_code == 204:
-                print(f"Student '{name}' deleted successfully!")
-            else:
-                print(f"Error deleting student '{name}': {response.text}")
-            return
-    print(f"Student '{name}' not found.")
-
-
-def search_student(name: str):
-    """
-    Search for a student by name and return their record.
-    Args:
-    - name (str): The name of the student to search for.
-    """
-    # Check if the student exists
-    data = get_students_data()
-    for student in data:
-        if student['name'] == name:
-            return (f"Name: {student['name']} Surname: {student['surname']}\n"
-                    f"Age: {student['age']}\nGrade: {student['grade']}\nSubjects: {student['subjects']}")
-    return None
+    first_name = input("Enter the first name of the student: ").capitalize()
+    last_name = input("Enter the last name of the student: ").capitalize()
+    full_name = f"{first_name} {last_name}"
+    key = f"{full_name}"  # Use full name as the key for simplicity
+    if key in students:
+        student_info = students[key]
+        # Print student information
+        print("Student Information:")
+        for field, value in student_info.items():
+            print(f"{field}: {value}")
+    else:
+        print(f"Student with name '{full_name}' not found.")
 
 
 def list_all_students():
     """
-    List all student records.
-    """
-    data = get_students_data()
+    Reads all student information from the students.json file and prints it in a user-friendly format.
 
-    if len(data) == 0:
-        print("No student records found.")
-    else:
-        # Print all student records
-        for student in data:
-            print(f"Name: {student['name']}, Surname: {student['surname']}\n"
-                  f"Age: {student['age']}\nGrade: {student['grade']}\nSubjects: {student['subjects']}\n")
+    """
+
+    with open('students.json', 'r') as f:
+        students = json.load(f)
+
+    if not students:
+        print("No students found in the file.")
+        return  # Exit the function if there are no students
+
+    # Print student information
+    print("Students:")
+    for name, info in students.items():
+        print(f"{name}:")
+        for field, value in info.items():
+            print(f"- {field}: {value}")
+        print()  # Print an empty line between students
