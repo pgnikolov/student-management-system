@@ -1,5 +1,7 @@
 # Students Management System :school:	
 
+![pic](https://github.com/pgnikolov/student-management-system/assets/151896883/75dc6683-e5bb-4e34-ab8e-013146059d72)
+
 ### SoftUni lecturer's task  
 
 This Python script provides a basic command-line interface for managing student data in an educational institution.
