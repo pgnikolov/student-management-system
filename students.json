@@ -3,7 +3,7 @@
         "first_name": "Ivan",
         "last_name": "Ivanov",
         "age": 18,
-        "sex": "Male",
+        "sex": "M",
         "email": "vankata@abv.bg",
         "subjects": {
             "Math": 5.75,
@@ -15,7 +15,7 @@
         "first_name": "Plamen",
         "last_name": "Nikoloc",
         "age": 19,
-        "sex": "male",
+        "sex": "M",
         "email": "dpdpd@dwd",
         "subjects": {
             "Math": 5.75,
