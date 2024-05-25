@@ -2,6 +2,9 @@ import json
 
 
 def add_student():
+    """
+      This function adds a new student to the students.json file.
+      """
     with open('students.json', 'r') as f:
         students = json.load(f)
 
@@ -44,7 +47,7 @@ def add_student():
 def update_student(name):
     """
     Updates the information of an existing student in the students.json file.
-    update specific fields (first name, last name, age, sex, email)
+    update specific fields (first name, last name, age, sex, email, subject)
 
     """
 
@@ -121,6 +124,10 @@ def delete_student(name):
 
 
 def search_student(name):
+    """
+    This function searches for a student in the students.json file by name.
+    Args: a student name.
+    """
     with open('students.json', 'r') as f:
         students = json.load(f)
 
