@@ -1,5 +1,7 @@
 # Students Management System :school:	
 
+![pic](https://github.com/pgnikolov/student-management-system/assets/151896883/75dc6683-e5bb-4e34-ab8e-013146059d72)
+
 ### SoftUni lecturer's task  
 
 This Python script provides a basic command-line interface for managing student data in an educational institution.
@@ -52,6 +54,8 @@ This Python script provides a basic command-line interface for managing student 
 
 ### Future Development:
 
+* Academic Records: Keeps track of grades and academic progress.
+* Attendance & Scheduling: Tracks student attendance and manages class schedules.
 * Implement data storage using files or a database to persist student information.
 * Add features like displaying student details, searching by partial names, and storing additional student information.
 * Develop a more user-friendly interface (e.g., using a graphical user interface library).
