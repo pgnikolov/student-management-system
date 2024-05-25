@@ -51,35 +51,40 @@ def update_student(name):
     with open('students.json', 'r') as f:
         students = json.load(f)
 
+    student_info = students[name]
+
     if name not in students:
         print(f"Student with name '{name}' not found.")
 
     updated_fields = {}  # Dictionary to store updated information
 
     while True:
-        field_to_update = input(
-            "Enter the field to update (first_name, last_name, age, sex, email, or 'q' to quit): ").lower()
+        update_field = input(
+            "Enter the field to update (first_name, last_name, age, sex, email, subjects, or 'q' to quit): ").lower()
 
-        if field_to_update == 'q':
+        if update_field == 'q':
             break
 
-        if field_to_update not in students[name]:
-            print(f"Invalid field: '{field_to_update}'. Valid fields are: first_name, last_name, age, sex, email.")
-            continue
+        if update_field == 'subjects':
+            update_subject = input("Enter the subject to update (or 'add' to add a new subject): ").lower()
 
-        if field_to_update == 'age':
-            new_value = int(input(f"Enter the new value for {field_to_update}: "))
-            if new_value < 0:
-                print("Age cannot be negative.")
-                print(f"Invalid input for '{field_to_update}'. Please enter a valid value.")
+            if update_subject == 'add':
+                subject = input("Enter new subject name: ")
+                grade = int(input(f"Enter grade for {subject}: "))
+                student_info['subjects'][subject] = grade
+            else:
+                if update_subject not in student_info['subjects']:
+                    print(f"Subject '{update_subject}' not found.")
+                    continue
 
-        new_value = input(f"Enter the new value for {field_to_update}: ")
-        updated_fields[field_to_update] = new_value
+                new_grade = int(input(f"Enter new grade for {update_subject}: "))
+                student_info['subjects'][update_subject] = new_grade
+        else:
+            # Update other fields as needed (similar logic)
+            pass
 
-        continue
-
-    # Update the student's information with the collected data
-    students[name].update(updated_fields)
+        # Update the student information in the main dictionary
+    students[name] = student_info
 
     # Save the updated students data to the JSON filea
     with open('students.json', 'w') as f:
