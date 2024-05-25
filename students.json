@@ -6,9 +6,17 @@
         "sex": "M",
         "email": "vankata@abv.bg",
         "subjects": {
-            "Math": 5.75,
-            "Science": 5.0,
-            "English": 6.0
+            "Mathematics": 5.75,
+            "Literature": 5.00,
+            "IT": 5.00,
+            "History": 5.0,
+            "Geography": 6.0,
+            "Philosophy": 4.75,
+            "Biology": 4.00,
+            "Physics": 5.00,
+            "Chemistry": 3.25,
+            "Sport": 4.00,
+            "Art": 6.00
         }
     },
     "Plamen Nikoloc": {
@@ -18,9 +26,17 @@
         "sex": "M",
         "email": "dpdpd@dwd",
         "subjects": {
-            "Math": 5.75,
-            "Science": 4.5,
-            "English": 5.0
+            "Mathematics": 5.75,
+            "Literature": 5.00,
+            "IT": 5.00,
+            "History": 5.0,
+            "Geography": 6.0,
+            "Philosophy": 4.75,
+            "Biology": 4.00,
+            "Physics": 5.00,
+            "Chemistry": 3.25,
+            "Sport": 4.00,
+            "Art": 6.00
         }
     },
     "Manuela Kasarova": {
@@ -30,9 +46,17 @@
         "sex": "F",
         "email": "kasr@abv.bg",
         "subjects": {
-            "Math": 6.0,
-            "Art": 5.78,
-            "Biology": 5.0
+            "Mathematics": 5.75,
+            "Literature": 5.00,
+            "IT": 5.00,
+            "History": 5.0,
+            "Geography": 6.0,
+            "Philosophy": 4.75,
+            "Biology": 4.00,
+            "Physics": 5.00,
+            "Chemistry": 3.25,
+            "Sport": 4.00,
+            "Art": 6.00
         }
     }
 }
