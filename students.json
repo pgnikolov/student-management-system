@@ -7,16 +7,16 @@
         "email": "vankata@abv.bg",
         "subjects": {
             "Mathematics": 5.75,
-            "Literature": 5.00,
-            "IT": 5.00,
+            "Literature": 5.0,
+            "IT": 5.0,
             "History": 5.0,
             "Geography": 6.0,
             "Philosophy": 4.75,
-            "Biology": 4.00,
-            "Physics": 5.00,
+            "Biology": 4.0,
+            "Physics": 5.0,
             "Chemistry": 3.25,
-            "Sport": 4.00,
-            "Art": 6.00
+            "Sport": 4.0,
+            "Art": 6.0
         }
     },
     "Plamen Nikoloc": {
@@ -27,16 +27,16 @@
         "email": "dpdpd@dwd",
         "subjects": {
             "Mathematics": 5.75,
-            "Literature": 5.00,
-            "IT": 5.00,
+            "Literature": 5.0,
+            "IT": 5.0,
             "History": 5.0,
             "Geography": 6.0,
             "Philosophy": 4.75,
-            "Biology": 4.00,
-            "Physics": 5.00,
+            "Biology": 4.0,
+            "Physics": 5.0,
             "Chemistry": 3.25,
-            "Sport": 4.00,
-            "Art": 6.00
+            "Sport": 4.0,
+            "Art": 6.0
         }
     },
     "Manuela Kasarova": {
@@ -47,16 +47,36 @@
         "email": "kasr@abv.bg",
         "subjects": {
             "Mathematics": 5.75,
-            "Literature": 5.00,
-            "IT": 5.00,
+            "Literature": 5.0,
+            "IT": 5.0,
             "History": 5.0,
             "Geography": 6.0,
             "Philosophy": 4.75,
-            "Biology": 4.00,
-            "Physics": 5.00,
+            "Biology": 4.0,
+            "Physics": 5.0,
             "Chemistry": 3.25,
-            "Sport": 4.00,
-            "Art": 6.00
+            "Sport": 4.0,
+            "Art": 6.0
+        }
+    },
+    "Sdsadas Sdsada": {
+        "first_name": "Sdsadas",
+        "last_name": "Sdsada",
+        "age": 14,
+        "sex": "Male",
+        "email": "djisdjs@dsd.bg",
+        "subjects": {
+            "Mathematics": 5.0,
+            "Literature": 5.0,
+            "IT": 5.0,
+            "History": 5.0,
+            "Geography": 5.0,
+            "Philosophy": 5.0,
+            "Biology": 5.0,
+            "Physics": 5.0,
+            "Chemistry": 5.0,
+            "Sport": 5.0,
+            "Art": 5.0
         }
     }
 }

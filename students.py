@@ -51,28 +51,22 @@ def update_student(name):
 
 	while True:
 		update_field = input(
-			"Enter the field to update (first_name, last_name, age, sex, email, subjects, or 'q' to quit): ").lower()
+			"Enter the field to update (age, subjects, or 'q' to quit): ").lower()
 
 		if update_field == 'q':
 			break
+		elif update_field == "age":
+			age = int(input())
+			student_info[update_field] = age
+		elif update_field == 'subjects':
+			update_subject = input("Enter the subject to update(Mathematics, Literature, IT, History, "
+								   "Geography, Philosophy, Biology, Physics, Chemistry, Sport, Art): ").capitalize()
+			grade = float(input(f"Enter grade for {update_subject}: "))
+			student_info['subjects'][update_subject] = grade
 
-		if update_field == 'subjects':
-			update_subject = input("Enter the subject to update (or 'add' to add a new subject): ").lower()
-
-			if update_subject == 'add':
-				subject = input("Enter new subject name: ")
-				grade = int(input(f"Enter grade for {subject}: "))
-				student_info['subjects'][subject] = grade
-			else:
-				if update_subject not in student_info['subjects']:
-					print(f"Subject '{update_subject}' not found.")
-					continue
-
-				new_grade = int(input(f"Enter new grade for {update_subject}: "))
-				student_info['subjects'][update_subject] = new_grade
-		else:
-			# Update other fields as needed (similar logic)
-			pass
+			if update_subject not in student_info['subjects']:
+				print(f"Subject '{update_subject}' not found.")
+				continue
 
 	# Update the student information in the main dictionary
 	students[name] = student_info
