@@ -59,3 +59,12 @@ This Python script provides a basic command-line interface for managing student 
 * Implement data storage using files or a database to persist student information.
 * Add features like displaying student details, searching by partial names, and storing additional student information.
 * Develop a more user-friendly interface (e.g., using a graphical user interface library).
+
+### Contributing
+Contributions are welcome! Please fork the repository and submit a pull request.
+
+### License
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+### Contact
+For any questions or feedback, please contact [![Gmail](https://img.shields.io/badge/-Gmail-c14438?style=flat&logo=Gmail&logoColor=white)](mailto:pgnikolov@gmail.com)
