@@ -93,7 +93,7 @@ def delete_student(name):
 
 	if name not in students:
 		print(f"Student with name '{name}' not found.")
-		return  # Exit the function if student not found
+		return  # Exit the function if a student not found
 
 	confirmation = input(f"Are you sure you want to delete student '{name}' (y/n): ").lower()
 
