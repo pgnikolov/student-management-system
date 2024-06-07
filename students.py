@@ -36,6 +36,8 @@ def update_student(name):
 	"""
 	Updates the information of an existing student in the students.json file.
 	update specific fields (first name, last name, age, sex, email, subject)
+	Args:
+		name (str): first_name + last_name
 
 	"""
 
@@ -81,6 +83,8 @@ def update_student(name):
 def delete_student(name):
 	"""
 	Deletes a student's information from the students.json file.
+		Args:
+		name (str): first_name + last_name
 
 	"""
 
@@ -94,10 +98,9 @@ def delete_student(name):
 	confirmation = input(f"Are you sure you want to delete student '{name}' (y/n): ").lower()
 
 	if confirmation == 'y':
-		del students[name]  # Remove student data using del
+		students.pop(name)  # Remove student data using del
 		print(f"Student '{name}' deleted successfully!")
 
-		# Save the updated students data to the JSON file
 		with open('students.json', 'w') as f:
 			json.dump(students, f, indent=4)
 
@@ -108,7 +111,8 @@ def delete_student(name):
 def search_student(name):
 	"""
 	This function searches for a student in the students.json file by name.
-	Args: a student name.
+	Args:
+		name (str): first_name + last_name
 	"""
 	with open('students.json', 'r') as f:
 		students = json.load(f)
