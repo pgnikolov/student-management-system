@@ -1,8 +1,9 @@
 # Student Management System :school:	
 
-![pic](https://github.com/pgnikolov/student-management-system/assets/151896883/75dc6683-e5bb-4e34-ab8e-013146059d72)
+<img src="https://github.com/pgnikolov/student-management-system/assets/151896883/f86c16d7-3e41-490b-9141-c7e927b731fc" width="828" height="464"/>
 
-A simple command-line student management system written in Python. This project allows users to manage student records by adding, updating, deleting, searching, and listing student information.
+A simple command-line student management system written in Python. This project allows users to manage 
+student records by adding, updating, deleting, searching, and listing student information.
 
 ## Features
 - Add Student: Add new student records.
