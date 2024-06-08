@@ -1,11 +1,11 @@
 # Student Management System :school:	
 
-<img src="https://github.com/pgnikolov/student-management-system/assets/151896883/f86c16d7-3e41-490b-9141-c7e927b731fc" width="828" height="464"/>
+<img src="https://github.com/pgnikolov/student-management-system/assets/151896883/f86c16d7-3e41-490b-9141-c7e927b731fc" width="700" height="400"/>
 
 A simple command-line student management system written in Python. This project allows users to manage 
 student records by adding, updating, deleting, searching, and listing student information.
 
-## Features
+## Features 🧰
 - Add Student: Add new student records.
 - Update Student: Update existing student records.
 - Delete Student: Remove student records.
@@ -14,11 +14,11 @@ student records by adding, updating, deleting, searching, and listing student in
 
 ## Getting Started
 
-### Prerequisites
+### Prerequisites 📚
 - Python 3.x
 - `students.json` file in the project directory (initially an empty list: `[]`)
 
-### Installation
+### Installation ⚙️
 
 1. Clone the repository:
 ```bash
@@ -37,7 +37,7 @@ python main.py
 ```
 Follow the on-screen menu to perform various student management operations.
 
-### Functions
+### Functions 🎚️
 Student Operations
 `add_student()`
 Adds a new student to the students.json file.
@@ -84,18 +84,18 @@ The main menu provides the following options:
 5. List All Students: List all student records.
 6. Exit: Exit the program.
 
-### Running the Program
+### Running the Program ⏯️
 To start the student management system, run the following command:
 ```bash
 python main_code.py
 ```
 Follow the on-screen prompts to manage student records.
 
-### Contributing
+### Contributing 🤝
 Contributions are welcome! Please fork the repository and submit a pull request.
 
-### License
+### License 📝
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-### Contact
+### Contact 📫
 For any questions or feedback, please contact [![Gmail](https://img.shields.io/badge/-Gmail-c14438?style=flat&logo=Gmail&logoColor=white)](mailto:pgnikolov@gmail.com)
