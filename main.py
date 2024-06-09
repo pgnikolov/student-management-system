@@ -1,4 +1,48 @@
 import json
+from openpyxl import Workbook
+
+
+def new_file_students_by_user():
+    """
+    Create Excel file and ask the user for amount of columns
+    and their names.
+    Return:
+        Excel file
+    """
+    workbook = Workbook()
+    sheet = workbook.active
+    sheet.title = input("Enter a title for your sheet: ")
+    file_name = input("Enter a name for your file (to be saved as): ")
+
+    columns = int(input("How many columns do you want?: "))
+
+    for i in range(1, columns + 1):
+        sheet.cell(row=1, column=i).value = input("Enter column title: ")
+
+    workbook.save(filename=file_name)
+
+
+def new_file_students_default():
+    """
+    Creates new Excel file to add student information
+    Return:
+         students.xlsx(Excel file)
+    """
+
+    workbook = Workbook()
+    sheet = workbook.active
+    sheet.title = 'Information'
+
+    sheet['A1'] = 'First Name'
+    sheet['B1'] = 'Middle Name'
+    sheet['C1'] = 'Last Name'
+    sheet['D1'] = 'Date of Birth'
+    sheet['E1'] = 'Gender'
+    sheet['F1'] = 'Age'
+    sheet['G1'] = "Parent's Name"
+
+    return workbook.save(filename='students.xlsx')
+
 
 def add_student(first_name, last_name, age, sex, email, subjects):
     """
