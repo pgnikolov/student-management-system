@@ -7,10 +7,10 @@ student records by adding, updating, deleting, searching, and listing student in
 
 ## Features 🧰
 - Add Student: Add new student records.
-- Update Student: Update existing student records.
-- Delete Student: Remove student records.
-- Search Student: Search for student records by name.
-- List All Students: List all student records.
+- ~~Update Student: Update existing student records.~~
+- ~~Delete Student: Remove student records.~~
+- ~~Search Student: Search for student records by name.~~
+- ~~List All Students: List all student records.~~
 
 ## Current Status 🚧
 
@@ -36,22 +36,18 @@ Transitioning from storing records in a `JSON` file to using `Excel` files for b
 
 
 
-## Getting Started
+## Getting Started  🏗️
 
 ### Prerequisites 📚
 - Python 3.x
-- `students.json` file in the project directory (initially an empty list: `[]`)
 
-### Installation ⚙️
+
+### Installation ⚙️ 
 
 1. Clone the repository:
   ```bash
   git clone https://github.com/yourusername/student-management-system.git
   cd student-management-system
-  ```
-2. Create a `students.json` file in the project directory with an initial empty list:
-  ```json
-  []
   ```
 
 ### Usage
@@ -62,67 +58,18 @@ Transitioning from storing records in a `JSON` file to using `Excel` files for b
 2. Follow the on-screen menu to perform various student management operations.
 
 ### Functions 🎚️
-Student Operations
+
+Student Operations - ❗UPDATED FUNCTIONS WILL BE AVAILABLE SOON ❗
 
 `add_student()`
-<details>
-  <summary>More info</summary>
 
-  Adds a new student to the students.json file.
-  1. Prompts:
-     * First name
-     * Last name
-     * Age
-     * Sex
-     * Email
-     * Subjects and grades
-  2. Updates: `students.json` with the new student information.
+~~`update_student(name)`~~
 
-</details>
+~~`delete_student(name)`~~
 
-`update_student(name)`
+~~`search_student(name)`~~
 
-<details>
-  <summary>More info</summary>
-
-  Updates the information of an existing student in the `students.json` file.
-  - Parameters:
-    - `name` (str): The full name of the student to be updated.
-  - Prompts: Field to update (first name, last name, age, sex, email, subjects).
-  - Updates: `students.json` with the updated student information.
-</details>
-
-
-`delete_student(name)`
-
-<details>
-  <summary>More info</summary>
-  
-  Deletes a student's information from the `students.json` file.
-  - Parameters:
-    - `name` (str): The full name of the student to be deleted.
-  - Prompts: Confirmation to delete the student.
-  - Updates: `students.json` with the student removed.
-</details>
-
-`search_student(name)`
-<details>
-  <summary>More info</summary>
-
-  Searches for a student in the `students.json` file by name.
-  - Parameters:
-    - `name` (str): The full name of the student to search for.
-  - Displays: The student information if found.
-</details>
-
-`list_all_students()`
-<details>
-  <summary>More info</summary>
-
-  - Reads all student information from the `students.json` file.
-  - Prints it in a user-friendly format.
-  - Displays: All student records.
-</details>
+~~`list_all_students()`~~
 
 ### Menu
 The main menu provides the following options:
@@ -135,11 +82,11 @@ The main menu provides the following options:
 6. Exit: Exit the program.
 
 ### Running the Program ⏯️
-To start the student management system, run the following command:
-```bash
-python main.py
-```
-Follow the on-screen prompts to manage student records.
+~~To start the student management system, run the following command:~~
+~~```bash~~
+~~python main.py~~
+~~```~~
+~~Follow the on-screen prompts to manage student records.~~
 
 ## Contributing 🤝
 Contributions are welcome! Please fork the repository and submit a pull request.
