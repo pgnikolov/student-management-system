@@ -15,18 +15,18 @@ student records by adding, updating, deleting, searching, and listing student in
 ## Current Status 🚧
 
 The project is currently in active development 🚀, with significant changes underway to enhance its functionality and improve the main concept.
-We are transitioning from storing records in a `JSON` file to using `Excel` files for better 📊 data management and manipulation directly from the code.
+Transitioning from storing records in a `JSON` file to using `Excel` files for better 📊 data management and manipulation directly from the code.
 
 ## Roadmap  🗺️
 
 * **Transition to Excel-Based Data Management** 🌱
 
-    We are currently implementing functionality 🔧 to create, load, and save student records 💾 using Excel files directly within the code. 
+    Currently implementing functionality 🔧 to create, load, and save student records 💾 using Excel files directly within the code. 
     This change will provide users with more robust data management capabilities and easier manipulation of student information 📊.
 
 * **Enhanced User Interaction** 💬
 
-    We plan to improve the user interaction experience by adding features such as customizable Excel file creation, 
+    The plan is to improve the user interaction experience by adding features such as customizable Excel file creation, 
     allowing users to define the structure of their student records directly from the application 📝.
 
 * **Expanded Functionality** 🚀
