@@ -2,47 +2,6 @@ import json
 from openpyxl import Workbook
 
 
-def new_file_students_by_user():
-    """
-    Create Excel file and ask the user for amount of columns
-    and their names.
-    Return:
-        Excel file
-    """
-    workbook = Workbook()
-    sheet = workbook.active
-    sheet.title = input("Enter a title for your sheet: ")
-    file_name = input("Enter a name for your file (to be saved as): ")
-
-    columns = int(input("How many columns do you want?: "))
-
-    for i in range(1, columns + 1):
-        sheet.cell(row=1, column=i).value = input("Enter column title: ")
-
-    workbook.save(filename=file_name)
-
-
-def new_file_students_default():
-    """
-    Creates new Excel file to add student information
-    Return:
-         students.xlsx(Excel file)
-    """
-
-    workbook = Workbook()
-    sheet = workbook.active
-    sheet.title = 'Information'
-
-    sheet['A1'] = 'First Name'
-    sheet['B1'] = 'Middle Name'
-    sheet['C1'] = 'Last Name'
-    sheet['D1'] = 'Date of Birth'
-    sheet['E1'] = 'Gender'
-    sheet['F1'] = 'Age'
-    sheet['G1'] = "Parent's Name"
-
-    return workbook.save(filename='students.xlsx')
-
 
 def add_student(first_name, last_name, age, sex, email, subjects):
     """
@@ -204,7 +163,11 @@ def main():
         print("3. Delete Student")
         print("4. Search Student")
         print("5. List All Students")
-        print("6. Exit")
+        print("6. Create new custom file")
+        print("7. Create new default file")
+        print("8. Load existing file")
+        print("9. Save changes to an existing file")
+        print("10. Exit")
 
         # Prompt user for their choice
         choice = input("Enter your choice: ")
@@ -215,8 +178,8 @@ def main():
             age = int(input("Enter the age of the student: "))
             sex = input("Enter the sex of the student (Male/Female): ").capitalize()
             email = input("Enter the email of the student: ").lower()
-            subjects_lst = ["Mathematics", "Literature", "IT", "History", "Geography", "Philosophy", "Biology",
-                            "Physics", "Chemistry", "Sport", "Art"]
+            subjects_lst = ["Mathematics", "Physics", "Chemistry", "Biology", "English Language", "Foreign Language", "History",
+                            "Geography", "Literature", "Sport", "Art", "IT", "Philosophy"]
             grades = [float(input(f"Enter grade for {subjects_lst[i]}: ")) for i in range(len(subjects_lst))]
             subjects = {subject: grade for subject in subjects_lst for grade in grades}
 
