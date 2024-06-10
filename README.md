@@ -141,11 +141,11 @@ python main.py
 ```
 Follow the on-screen prompts to manage student records.
 
-### Contributing 🤝
+## Contributing 🤝
 Contributions are welcome! Please fork the repository and submit a pull request.
 
-### License 📝
+## License 📝
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-### Contact 📫
+## Contact 📫
 For any questions or feedback, please contact [![Gmail](https://img.shields.io/badge/-Gmail-c14438?style=flat&logo=Gmail&logoColor=white)](mailto:pgnikolov@gmail.com)
