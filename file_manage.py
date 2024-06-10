@@ -8,7 +8,7 @@ def new_all_students_custom(sheet_name: str, file_name: str, columns: int):
 
     Args:
         sheet_name (str): Name of sheet in Excel workbook
-        file_name (str): Name of file (example "all_2024" all students start 2024)
+        file_name (str): Name of file (example "all_2024" all students who start 2024)
         columns (int): Number of columns in Sheet
 
     Return:
@@ -54,13 +54,13 @@ def load_existing_file(file_path: str):
 
     Args:
         file_path (str): The path to the Excel file to be loaded.
-
     Returns:
-        dict: A dictionary containing the workbook and available sheets.
+        workbook
     """
     workbook = load_workbook(file_path)
-    available_sheets = {sheet.title: sheet for sheet in workbook.worksheets}
-    return {"workbook": workbook, "available_sheets": available_sheets}
+
+    print(workbook.sheetnames)
+    return workbook
 
 
 def save_existing_file(workbook, file_name: str):
