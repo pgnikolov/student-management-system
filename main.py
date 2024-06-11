@@ -23,7 +23,7 @@ def add_student(student: list, wb_year: Workbook, class_students: str):
     print("Student added successfully!")
 
 
-def update_student(name):
+def update_student():
     """
     Updates the information of an existing student in the students.json file.
     update specific fields (first name, last name, age, sex, email, subject)
@@ -31,7 +31,6 @@ def update_student(name):
         name (str): first_name + last_name
 
     """
-
 
 
 def delete_student(name):
@@ -51,11 +50,28 @@ def search_student(name):
     """
 
 
-def list_all_students():
+def list_all_students_by_group(file_paht:str, class_students: str):
     """
     Reads all student information from the students.json file and prints it in a user-friendly format.
 
     """
+    wb = fm.load_existing_file(file_paht)
+    sheet = wb[class_students]
+
+    for row in sheet.iter_rows(min_row=2, min_col=1, max_col=2):
+        print(*(cell.value for cell in row))
+
+
+def list_all_students_by_year(file_paht: str):
+    """
+    Reads all student information from the students.json file and prints it in a user-friendly format.
+
+    """
+    wb = fm.load_existing_file(file_paht)
+    sheet = wb.worksheets[0]
+
+    for row in sheet.iter_rows(min_row=2, min_col=1, max_col=2):
+        print(*(cell.value for cell in row))
 
 
 def main():
@@ -73,12 +89,13 @@ def main():
         print("2. Update Student")
         print("3. Delete Student")
         print("4. Search Student")
-        print("5. List All Students")
-        print("6. Create new custom file")
-        print("7. Create new default file")
-        print("8. Load existing file")
-        print("9. Save changes to an existing file")
-        print("10. Exit")
+        print("5. List All Students in same Group")
+        print("6. List All Students in same Year")
+        print("7. Create new custom file")
+        print("8. Create new default file")
+        print("9. Load existing file")
+        print("10. Save changes to an existing file")
+        print("11. Exit")
 
         # Prompt user for their choice
         choice = input("Enter your choice: ")
@@ -92,9 +109,8 @@ def main():
             path_to_wb = input("Enter the path to a file, where you want to add new student: ")
             wb = fm.load_existing_file(path_to_wb)
             add_student(new_student, wb, students_group)
-            # grades = [float(input(f"Enter grade for {subjects_lst[i]}: ")) for i in range(len(subjects_lst))]
-            # subjects = {subject: grade for subject in subjects_lst for grade in grades}
         elif choice == '2':
+
             first_name = input("Enter the first name of the student to update: ").capitalize()
             last_name = input("Enter the last name of the student to update: ").capitalize()
 
@@ -107,10 +123,12 @@ def main():
             last_name = input("Enter the last name of the student to update: ").capitalize()
 
         elif choice == '5':
-
+            file_name = input("Please enter path to the file: ").lower()
+            group_name = input("Please enter the name of the group('A', 'B', 'C', 'D': ").capitalize()
+            list_all_students_by_group(file_name, group_name)
         elif choice == '6':
-            # Exit the program
-            break
+            file_name = input("Please enter path to the file: ").lower()
+            list_all_students_by_year(file_name)
         else:
             print("Invalid choice, please try again.")
 
