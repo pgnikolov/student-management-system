@@ -52,8 +52,12 @@ def search_student(name):
 
 def list_all_students_by_group(file_paht:str, class_students: str):
     """
-    Reads all student information from the students.json file and prints it in a user-friendly format.
-
+        Print all students who are in same group (class).
+    Args:
+        file_paht (str): The file path of the Excel file.
+        class_students (str): The group(class) students we want.
+    Return:
+        None
     """
     wb = fm.load_existing_file(file_paht)
     sheet = wb[class_students]
@@ -64,8 +68,11 @@ def list_all_students_by_group(file_paht:str, class_students: str):
 
 def list_all_students_by_year(file_paht: str):
     """
-    Reads all student information from the students.json file and prints it in a user-friendly format.
-
+        Print all students from same year.
+    Args:
+        file_paht (str): The file path of the Excel file.
+    Return:
+        None
     """
     wb = fm.load_existing_file(file_paht)
     sheet = wb.worksheets[0]
