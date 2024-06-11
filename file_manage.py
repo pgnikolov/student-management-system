@@ -37,7 +37,7 @@ def new_all_students_default(file_name: str, sheet_name: str):
     """
     wb = Workbook()
     sheet = wb.active
-    sheet.title = 'ALL-2024'
+    sheet.title = sheet_name
 
     sheet['A1'] = 'first_name'
     sheet['B1'] = 'last_name'
