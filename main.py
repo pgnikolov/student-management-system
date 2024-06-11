@@ -1,4 +1,4 @@
-from openpyxl import Workbook, load_workbook
+from openpyxl import Workbook
 import file_manage as fm
 
 
@@ -19,38 +19,51 @@ def add_student(student: list, wb_year: Workbook, class_students: str):
 
     all_students_info.append(student)
     group_sheet.append(student)
+    return wb_year
 
-    print("Student added successfully!")
 
-
-def update_student():
+def delete_student(first_name_del: str, last_name_del: str, class_students: str, wb_year: Workbook):
     """
-    Updates the information of an existing student in the students.json file.
-    update specific fields (first name, last name, age, sex, email, subject)
+        Delte student record from woorkbook(from all students info and from group)
     Args:
-        name (str): first_name + last_name
-
+        first_name_del (str): Student's last name.
+        last_name_del (str): Student's last name.
+        class_students (str): The class to which student belongs.
+        wb_year (Workbook): The workbook to delete the student from.
+    Return:
+        wb_year (Workbook): Whithout the student has been deleted.
     """
+    all_students_info = wb_year.worksheets[0]
+    group_sheet = wb_year[class_students]
+
+    fm.delete_row(all_students_info, first_name_del, last_name_del)
+    fm.delete_row(group_sheet, first_name_del, last_name_del)
+
+    return wb_year
 
 
-def delete_student(name):
+def search_student(first_name_search: str, last_name_search: str, wb_year: Workbook):
     """
-    Deletes a student's information from the students.json file.
-        Args:
-        name (str): first_name + last_name
-
-    """
-
-
-def search_student(name):
-    """
-    This function searches for a student in the students.json file by name.
+        This function searches for a student in the students Excel file by name.
     Args:
-        name (str): first_name + last_name
+        first_name_search (str): Student's first name.
+        last_name_search (str): Student's last name.
+        wb_year (Workbook): The workbook to search the student.
+    return
+        None
     """
+    serch_sheet = wb_year.worksheets[0]
+
+    rows = serch_sheet.iter_rows(min_row=2, min_col=1, max_col=2)
+
+    for fn, ln in rows:
+        if fn.value == first_name_search and ln.value == last_name_search:
+            return f"Row number: {fn.row}, Name {fn.value} {ln.value},"
+
+    return None
 
 
-def list_all_students_by_group(file_paht:str, class_students: str):
+def list_all_students_by_group(file_paht: str, class_students: str):
     """
         Print all students who are in same group (class).
     Args:
@@ -81,28 +94,67 @@ def list_all_students_by_year(file_paht: str):
         print(*(cell.value for cell in row))
 
 
+def new_all_students_custom(file_name: str, sheet_name: str, columns: int):
+    """
+        Create Excel file and ask the user for amount of columns and their names.
+    Args:
+        file_name (str): Name of file (example "all_2024" all students who start 2024)
+        sheet_name (str): Name of sheet in Excel workbook
+        columns (int): Number of columns in Sheet
+    Return:
+         None
+    """
+    wb = Workbook()
+    sheet = wb.active
+    sheet.title = sheet_name
+
+    for i in range(1, columns + 1):
+        sheet.cell(row=1, column=i).value = input("Enter column title: ")
+
+    wb.save(filename=file_name)
+
+
+def new_all_students_default(file_name: str, sheet_name: str):
+    """
+    Creates a new Excel file with a default structure for adding student information.
+
+    Args:
+        file_name (str): The name of the file (for example - "all_2024.xlsx").
+        sheet_name (str): The name of the sheet in the Excel workbook.
+
+    Returns:
+        None
+    """
+    wb = Workbook()
+    sheet = wb.active
+    sheet.title = sheet_name
+
+    sheet['A1'] = 'first_name'
+    sheet['B1'] = 'last_name'
+    sheet['C1'] = 'gender'
+    sheet['D1'] = 'date_of_birth'
+    sheet['E1'] = "parent"
+
+    wb.save(filename=file_name)
+
+
 def main():
     """
     Main function to provide user interaction.
     """
-    current_workbook = None
-    available_sheets = None
-    new_student = []
+    wb_year: Workbook
 
     while True:
         # Display menu options
         print("\nStudent Management System")
         print("1. Add Student")
-        print("2. Update Student")
-        print("3. Delete Student")
-        print("4. Search Student")
-        print("5. List All Students in same Group")
-        print("6. List All Students in same Year")
-        print("7. Create new custom file")
-        print("8. Create new default file")
-        print("9. Load existing file")
-        print("10. Save changes to an existing file")
-        print("11. Exit")
+        print("2. Delete Student")
+        print("3. Search Student")
+        # print("4. List All Students in same Group")
+        # print("5. List All Students in same Year")
+        print("6. Create new custom file")
+        print("7. Create new default file")
+        print("8. Exit")
 
         # Prompt user for their choice
         choice = input("Enter your choice: ")
@@ -111,31 +163,45 @@ def main():
             new_student = [input("First name: ").capitalize(), input("Last name: ").capitalize(),
                            input("Gender (Male/Female): ").capitalize(), input("Date of birth(YYYY-MM-DD): "),
                            input("Parent First and Last name together: ").capitalize(), ]
-            students_group = input("Please choose a group ('A', 'B', 'C' or 'D'): ")
+            students_group = input("Choose a group ('A', 'B', 'C' or 'D'): ")
             new_student.append(new_student)
             path_to_wb = input("Enter the path to a file, where you want to add new student: ")
-            wb = fm.load_existing_file(path_to_wb)
-            add_student(new_student, wb, students_group)
+            wb_to_add = fm.load_existing_file(path_to_wb)
+            add_student(new_student, wb_to_add, students_group)
+            fm.save_existing_file(wb_to_add, path_to_wb)
         elif choice == '2':
-
             first_name = input("Enter the first name of the student to update: ").capitalize()
             last_name = input("Enter the last name of the student to update: ").capitalize()
-
+            group_name = input("Enter the in which group is the student('A', 'B', 'C' or 'D'): ").capitalize()
+            file_name = input("Enter path to the file: ")
+            wb_remove_student = fm.load_existing_file(file_name)
+            delete_student(first_name, last_name, group_name, wb_remove_student)
+            fm.save_existing_file(wb_remove_student, file_name)
         elif choice == '3':
             first_name = input("Enter the first name of the student to update: ").capitalize()
             last_name = input("Enter the last name of the student to update: ").capitalize()
-
+            file_name = input("Enter path to the file: ")
+            wb_to_search = fm.load_existing_file(file_name)
+            search_student(first_name, last_name, wb_to_search)
         elif choice == '4':
-            first_name = input("Enter the first name of the student to update: ").capitalize()
-            last_name = input("Enter the last name of the student to update: ").capitalize()
-
-        elif choice == '5':
-            file_name = input("Please enter path to the file: ").lower()
-            group_name = input("Please enter the name of the group('A', 'B', 'C', 'D': ").capitalize()
+            file_name = input("Enter path to the file: ").lower()
+            group_name = input("Enter the name of the group('A', 'B', 'C', 'D': ").capitalize()
             list_all_students_by_group(file_name, group_name)
-        elif choice == '6':
-            file_name = input("Please enter path to the file: ").lower()
+        elif choice == '5':
+            file_name = input("Enter path to the file: ").lower()
             list_all_students_by_year(file_name)
+        elif choice == "6":
+            file_name = input("Enter path to the file: ").lower()
+            sheet_name = input("Enter name for first sheet in your file: ")
+            amount_of_columns = int(input("Enter the number of columns you need: "))
+            new_all_students_custom(file_name, sheet_name, amount_of_columns)
+        elif choice == '7':
+            file_name = input("Enter path to the file: ").lower()
+            sheet_name = input("Enter name for first sheet in your file: ")
+            new_all_students_default(file_name, sheet_name)
+        elif choice == "8":
+            print("Exiting...")
+            break
         else:
             print("Invalid choice, please try again.")
 

@@ -25,53 +25,6 @@ def delete_row(sheet: Worksheet, first_name_del: str, last_name_del: str):
     return sheet
 
 
-def new_all_students_custom(sheet_name: str, file_name: str, columns: int):
-    """
-    Create Excel file and ask the user for amount of columns
-    and their names.
-
-    Args:
-        sheet_name (str): Name of sheet in Excel workbook
-        file_name (str): Name of file (example "all_2024" all students who start 2024)
-        columns (int): Number of columns in Sheet
-
-    Return:
-         None
-    """
-    wb = Workbook()
-    sheet = wb.active
-    sheet.title = sheet_name
-
-    for i in range(1, columns + 1):
-        sheet.cell(row=1, column=i).value = input("Enter column title: ")
-
-    wb.save(filename=file_name)
-
-
-def new_all_students_default(file_name: str, sheet_name: str):
-    """
-    Creates a new Excel file with a default structure for adding student information.
-
-    Args:
-        file_name (str): The name of the file (for example - "all_2024.xlsx").
-        sheet_name (str): The name of the sheet in the Excel workbook.
-
-    Returns:
-        None
-    """
-    wb = Workbook()
-    sheet = wb.active
-    sheet.title = sheet_name
-
-    sheet['A1'] = 'first_name'
-    sheet['B1'] = 'last_name'
-    sheet['C1'] = 'gender'
-    sheet['D1'] = 'date_of_birth'
-    sheet['E1'] = "parent"
-
-    wb.save(filename=file_name)
-
-
 def load_existing_file(file_path: str):
     """
     Loads an existing Excel file and returns the workbook and its sheets.
