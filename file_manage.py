@@ -24,6 +24,7 @@ def delete_row(sheet: Worksheet, first_name_del: str, last_name_del: str):
 
     return sheet
 
+
 def new_all_students_custom(sheet_name: str, file_name: str, columns: int):
     """
     Create Excel file and ask the user for amount of columns
@@ -98,4 +99,3 @@ def save_existing_file(workbook, file_name: str):
     """
     workbook.save(filename=file_name)
     print(f"Workbook saved as {file_name}")
-
