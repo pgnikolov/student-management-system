@@ -165,7 +165,6 @@ def main():
     """
     Main function to provide user interaction.
     """
-    wb_year: Workbook
 
     while True:
         # Display menu options
@@ -173,8 +172,8 @@ def main():
         print("1. Add Student")
         print("2. Delete Student")
         print("3. Search Student")
-        # print("4. List All Students in same Group")
-        # print("5. List All Students in same Year")
+        print("4. List All Students in same Group")
+        print("5. List All Students in same Year")
         print("6. Create new custom file")
         print("7. Create new default file")
         print("8. Exit")
