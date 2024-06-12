@@ -43,9 +43,7 @@ pip install openpyxl
 
 ### File Structure 📂
 
-`student_management.py`: The main script containing all functionalities.
-
-`file_manage.py`: A helper module for loading and saving Excel files and deleting rows.
+`main.py`: The main script containing all functionalities.
 
 ### Installation ⚙️ 
 
@@ -75,15 +73,6 @@ The main menu provides the following options:
 5. List All Students: List all student records. (Feature under development)
 6. Exit: Exit the program.
 
-### Running the Program ⏯️
-
-To start the student management system, run the following command:
-
-```bash
-python main.py
-```
-
-Follow the on-screen prompts to manage student records.
 
 ## Contributing 🤝
 Contributions are welcome! Please fork the repository and submit a pull request.
