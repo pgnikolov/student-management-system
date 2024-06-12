@@ -18,9 +18,8 @@ def delete_row(sheet: Worksheet, first_name_del: str, last_name_del: str):
         last_name = row[1].value
 
         if first_name == first_name_del and last_name == last_name_del:
-            # Delete the row if the first and last names match
             sheet.delete_rows(row[0].row)
-            break  # Exit the loop after deleting the first matching row
+            break
 
     return sheet
 
