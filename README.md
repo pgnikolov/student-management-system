@@ -1,46 +1,51 @@
-# Student Management System :school:	
+# Student Management System  📚
 
 <img src="https://github.com/pgnikolov/student-management-system/assets/151896883/f86c16d7-3e41-490b-9141-c7e927b731fc" width="700" height="400"/>
 
-A simple command-line student management system written in Python. This project allows users to manage 
-student records by adding, updating, deleting, searching, and listing student information.
+Command-line application for managing student records efficiently. It allows users to perform various operations such as adding, updating, deleting, and searching for student information.
+The system is designed to streamline administrative tasks related to student management.
 
-## Features 🧰
-- Add Student: Add new student records.
-- ~~Update Student: Update existing student records.~~
-- ~~Delete Student: Remove student records.~~
-- ~~Search Student: Search for student records by name.~~
-- ~~List All Students: List all student records.~~
+## Features  🛠️
+
+- Enhanced User Interaction: Improve user experience with customizable Excel file creation.
+- Expanded Functionality: Include advanced search options, sorting capabilities, and report generation directly from Excel data.
 
 ## Current Status 🚧
 
-The project is currently in active development 🚀, with significant changes underway to enhance its functionality and improve the main concept.
-Transitioning from storing records in a `JSON` file to using `Excel` files for better 📊 data management and manipulation directly from the code.
+The project is actively undergoing development to implement transition to Excel-based data management, enhance user interaction, and expand functionality.
 
 ## Roadmap  🗺️
 
-* **Transition to Excel-Based Data Management** 🌱
-
-    Currently implementing functionality 🔧 to create, load, and save student records 💾 using Excel files directly within the code. 
-    This change will provide users with more robust data management capabilities and easier manipulation of student information 📊.
-
-* **Enhanced User Interaction** 💬
-
-    The plan is to improve the user interaction experience by adding features such as customizable Excel file creation, 
-    allowing users to define the structure of their student records directly from the application 📝.
-
 * **Expanded Functionality** 🚀
 
-    Future updates will focus on expanding the functionality of the application, including advanced search options, 
-    sorting capabilities, and the ability to generate reports directly from the Excel data📊✨.
+    Future updates will focus on expanding the functionality of the application, including advanced search options,
+    sorting capabilities, and the ability to generate reports directly from the Excel data.📊✨.
+
+* **School Subjects and Grades Management** 📚
+
+    - Adding grades for different subjects.
+    - Calculating the average grade for the first half of the year, the second half, and the entire year.
+    - Providing insights into student performance and progress in various subjects.
 
 
 
-## Getting Started  🏗️
+## Getting Started  ⏯️
 
 ### Prerequisites 📚
-- Python 3.x
 
+- Python 3.x
+- openpyxl library
+
+You can install the required library using pip:
+```bash
+pip install openpyxl
+```
+
+### File Structure 📂
+
+`student_management.py`: The main script containing all functionalities.
+
+`file_manage.py`: A helper module for loading and saving Excel files and deleting rows.
 
 ### Installation ⚙️ 
 
@@ -51,6 +56,7 @@ Transitioning from storing records in a `JSON` file to using `Excel` files for b
   ```
 
 ### Usage
+
 1. Run the main script to start the student management system:
   ```bash
   python main.py
@@ -59,34 +65,25 @@ Transitioning from storing records in a `JSON` file to using `Excel` files for b
 
 ### Functions 🎚️
 
-Student Operations - ❗UPDATED FUNCTIONS WILL BE AVAILABLE SOON ❗
-
-`add_student()`
-
-~~`update_student(name)`~~
-
-~~`delete_student(name)`~~
-
-~~`search_student(name)`~~
-
-~~`list_all_students()`~~
-
 ### Menu
 The main menu provides the following options:
 
 1. Add Student: Add a new student record.
-2. Update Student: Update an existing student record.
-3. Delete Student: Remove a student record.
-4. Search Student: Search for a student record by name.
-5. List All Students: List all student records.
+2. Update Student: Update an existing student record. (Feature under development)
+3. Delete Student: Remove a student record. (Feature under development)
+4. Search Student: Search for a student record by name. (Feature under development)
+5. List All Students: List all student records. (Feature under development)
 6. Exit: Exit the program.
 
 ### Running the Program ⏯️
-~~To start the student management system, run the following command:~~
-~~```bash~~
-~~python main.py~~
-~~```~~
-~~Follow the on-screen prompts to manage student records.~~
+
+To start the student management system, run the following command:
+
+```bash
+python main.py
+```
+
+Follow the on-screen prompts to manage student records.
 
 ## Contributing 🤝
 Contributions are welcome! Please fork the repository and submit a pull request.
