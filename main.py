@@ -1,5 +1,28 @@
-from openpyxl import Workbook
-import file_manage as fm
+from openpyxl import Workbook, load_workbook
+from openpyxl.worksheet.worksheet import Worksheet
+
+
+def delete_row(sheet: Worksheet, first_name_del: str, last_name_del: str):
+    """
+        Delete all rows from a worksheet in the given workbook.
+    Args:
+        sheet: The worksheet to delete from.
+        first_name_del: Student's first name to delete.
+        last_name_del: Student's last name to delete.
+    Return:
+        sheet without the deleted row.
+    """
+
+    for row in sheet.iter_rows(min_row=2, max_row=sheet.max_row, min_col=1, max_col=2):
+        first_name = row[0].value
+        last_name = row[1].value
+
+        if first_name == first_name_del and last_name == last_name_del:
+            # Delete the row if the first and last names match
+            sheet.delete_rows(row[0].row)
+            break  # Exit the loop after deleting the first matching row
+
+    return sheet
 
 
 def add_student(student: list, wb_year: Workbook, class_students: str):
@@ -36,8 +59,8 @@ def delete_student(first_name_del: str, last_name_del: str, class_students: str,
     all_students_info = wb_year.worksheets[0]
     group_sheet = wb_year[class_students]
 
-    fm.delete_row(all_students_info, first_name_del, last_name_del)
-    fm.delete_row(group_sheet, first_name_del, last_name_del)
+    delete_row(all_students_info, first_name_del, last_name_del)
+    delete_row(group_sheet, first_name_del, last_name_del)
 
     return wb_year
 
@@ -72,7 +95,7 @@ def list_all_students_by_group(file_paht: str, class_students: str):
     Return:
         None
     """
-    wb = fm.load_existing_file(file_paht)
+    wb = load_workbook(file_paht)
     sheet = wb[class_students]
 
     for row in sheet.iter_rows(min_row=2, min_col=1, max_col=2):
@@ -87,7 +110,7 @@ def list_all_students_by_year(file_paht: str):
     Return:
         None
     """
-    wb = fm.load_existing_file(file_paht)
+    wb = load_workbook(file_paht)
     sheet = wb.worksheets[0]
 
     for row in sheet.iter_rows(min_row=2, min_col=1, max_col=2):
@@ -166,22 +189,22 @@ def main():
             students_group = input("Choose a group ('A', 'B', 'C' or 'D'): ")
             new_student.append(new_student)
             path_to_wb = input("Enter the path to a file, where you want to add new student: ")
-            wb_to_add = fm.load_existing_file(path_to_wb)
+            wb_to_add = load_workbook(path_to_wb)
             add_student(new_student, wb_to_add, students_group)
-            fm.save_existing_file(wb_to_add, path_to_wb)
+            wb_to_add.save(filename=path_to_wb)
         elif choice == '2':
             first_name = input("Enter the first name of the student to update: ").capitalize()
             last_name = input("Enter the last name of the student to update: ").capitalize()
             group_name = input("Enter the in which group is the student('A', 'B', 'C' or 'D'): ").capitalize()
             file_name = input("Enter path to the file: ")
-            wb_remove_student = fm.load_existing_file(file_name)
+            wb_remove_student = load_workbook(file_name)
             delete_student(first_name, last_name, group_name, wb_remove_student)
-            fm.save_existing_file(wb_remove_student, file_name)
+            wb_remove_student.save(filename=file_name)
         elif choice == '3':
             first_name = input("Enter the first name of the student to update: ").capitalize()
             last_name = input("Enter the last name of the student to update: ").capitalize()
             file_name = input("Enter path to the file: ")
-            wb_to_search = fm.load_existing_file(file_name)
+            wb_to_search = load_workbook(file_name)
             search_student(first_name, last_name, wb_to_search)
         elif choice == '4':
             file_name = input("Enter path to the file: ").lower()
