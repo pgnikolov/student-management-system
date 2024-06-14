@@ -177,6 +177,68 @@ This section details the newly implemented functions for retrieving and reportin
 
 * `subject (str)`: The subject for which to retrieve grades (e.g., "math").
 
+**Output Example**:
+
+```python
+first_name last_name  english_t1_end
+ Sebastian      Bell               6
+      Levi    Rogers               6
+     Aiden    Parker               5
+      Aria    Murphy               5
+  Victoria   Griffin               5
+      Nora      Ward               5
+   Natalie    Torres               5
+   Matthew   Stewart               5
+   Madison   Bennett               5
+      Zoey      Gray               5
+   Eleanor    Howard               5
+    Daniel      Cook               5
+     Chloe   Russell               5
+    Carter     Adams               5
+    Aurora     James               5
+      Jack    Nelson               4
+   Grayson       Lee               4
+      Lily   Ramirez               4
+     David      Ward               4
+      Owen    Cooper               4
+  Scarlett    Hughes               4
+     Caleb       Cox               4
+     Wyatt    Brooks               4
+     Layla     Price               4
+    Hannah  Peterson               3
+   Jackson      Reed               3
+
+```
+```python
+first_name last_name  chemistry_year
+     Henry    Harris             5.5
+  Benjamin   Jackson             5.5
+      Ella    Garcia             5.5
+   Michael  Thompson             5.5
+     Lucas     White             5.5
+   Abigail  Thompson             5.0
+  Victoria   Johnson             5.0
+    Sophia  Anderson             5.0
+    Oliver     Brown             5.0
+       Mia   Jackson             5.0
+     James    Thomas             5.0
+  Isabella    Thomas             5.0
+    Harper    Harris             5.0
+     Ethan    Garcia             5.0
+      Emma    Wilson             5.0
+       Ava    Taylor             5.0
+    Amelia     White             5.0
+ Alexander    Martin             4.5
+     Jacob  Martinez             4.5
+     Grace  Martinez             4.5
+      Liam   Johnson             4.5
+      Noah     Smith             4.5
+    Elijah    Taylor             4.5
+    Olivia     Moore             4.5
+   William  Anderson             4.5
+    Evelyn    Martin             4.0
+
+```
 **Important Notes** :
 
 * These functions directly print the results to the console, displaying students' first name, last name, and the requested grades (Term 1, Term 2, or Yearly) in descending order (highest to lowest).
