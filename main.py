@@ -87,6 +87,46 @@ def list_all_students_by_group(df_students: pd.DataFrame, class_students: str):
     return result
 
 
+def group_validation() -> str:
+    """
+        This function prompts the user to enter a student's group until a valid group is provided.
+        Valid groups are: "group_a", "group_b", "group_c", and "group_d".
+  Returns:
+      str: The validated student group entered by the user.
+    """
+    valid_groups = ["group_a", "group_b", "group_c", "group_d"]
+
+    while True:
+        group = input("Enter student's group(group_a, group_b, group_c or group_d: ").lower()
+        if group in valid_groups:
+            break
+        else:
+            print("Invalid group. Please enter 'group_a', 'group_b', 'group_c', or 'group_d'.")
+
+    return group
+
+
+def subject_validation() -> str:
+    """
+        This function prompts the user to enter a subject name until a valid subject is provided.
+        Valid subjects are: 'math', 'physics', 'chemistry', 'biology', 'english', 'history', 'geography', 'literature',
+        'sport', and 'it'.
+  Returns:
+      str: The validated subject name entered by the user.
+    """
+    valid_subjects = ['math', 'physics', 'chemistry', 'biology', 'english', 'history', 'geography', 'literature',
+                      'sport', 'it']
+    print(valid_subjects)
+    while True:
+        subject = input("Enter name of the subject you want to select: ")
+        if subject in valid_subjects:
+            break
+        else:
+            print("Invalid input. Please try again!")
+
+    return subject
+
+
 def get_student_information():
     """
         Prompts the user for student information and performs basic validation.
@@ -94,7 +134,6 @@ def get_student_information():
       list: A list containing the student's information.
     """
     valid_genders = ["Male", "Female"]
-    valid_groups = ["group_a", "group_b", "group_c", "group_d"]
 
     while True:
         first_name = input("First name: ").capitalize()
@@ -132,12 +171,7 @@ def get_student_information():
             else:
                 print("Invalid email format.")
 
-        while True:
-            group = input("Enter student's group(group_a, group_b, group_c or group_d: ").lower()
-            if group in valid_groups:
-                break
-            else:
-                print("Invalid group. Please enter 'group_a', 'group_b', 'group_c', or 'group_d'.")
+        group = group_validation()
 
         return [first_name, last_name, gender, birth_date, parent_name, city, address, student_email, parent_email,
                 group]
@@ -181,12 +215,63 @@ def validate_date(date_str):
         return False
 
 
+def get_grade_term1(df_students: pd.DataFrame, class_students: str, subject: str):
+    """
+        This function retrieves and prints the grades for a subject in Term 1 for a given class.
+     Args:
+      df_students (pd.DataFrame): The DataFrame with student information.
+      class_students (str): The name of the class (group) to filter students from.
+      subject (str): The subject which grades we want.
+  Returns:
+      None: Directly prints the results.
+    """
+    subject_to_sort = subject + '_t1_end'
+    a = df_students[df_students['group'] == class_students]
+    a.reset_index(drop=True, inplace=True)
+    results = (a[['first_name', 'last_name', subject_to_sort]].sort_values(by=subject_to_sort, ascending=False))
+    print(results.to_string(index=False))
+
+
+def get_grade_term2(df_students: pd.DataFrame, class_students: str, subject: str):
+    """
+        This function retrieves and prints the grades for a subject in Term 2 for a given class.
+     Args:
+      df_students (pd.DataFrame): The DataFrame with student information.
+      class_students (str): The name of the class (group) to filter students from.
+      subject (str): The subject which grades we want.
+  Returns:
+      None: Directly prints the results.
+    """
+    subject_to_sort = subject + '_t2_end'
+    a = df_students[df_students['group'] == class_students]
+    a.reset_index(drop=True, inplace=True)
+    results = (a[['first_name', 'last_name', subject_to_sort]].sort_values(by=subject_to_sort, ascending=False))
+    print(results.to_string(index=False))
+
+
+def get_grade_yearly(df_students: pd.DataFrame, class_students: str, subject: str):
+    """
+        This function retrieves and prints the yearly grades for a subject and given class.
+     Args:
+      df_students (pd.DataFrame): The DataFrame with student information.
+      class_students (str): The name of the class (group) to filter students from.
+      subject (str): The subject which grades we want.
+  Returns:
+      None: Directly prints the results.
+  """
+    subject_to_sort = subject + '_year'
+    a = df_students[df_students['group'] == class_students]
+    a.reset_index(drop=True, inplace=True)
+    results = (a[['first_name', 'last_name', subject_to_sort]].sort_values(by=subject_to_sort, ascending=False))
+    print(results.to_string(index=False))
+
+
 def main():
     """
     Main function to provide user interaction.
     """
     try:
-        df_students = pd.read_csv('.csv')
+        df_students = pd.read_csv('students23.csv')
     except FileNotFoundError:
         "Error: 'students2023.csv' File not found. Please create it or provide the correct file path."
 
@@ -199,7 +284,10 @@ def main():
         print("2. Delete Student")
         print("3. Search Student")
         print("4. List All Students in same Group")
-        print("5. Exit")
+        print("5. List term 1 final grades for choosen group and subject")
+        print("6. List term 2 final grades for choosen group and subject")
+        print("7. List yearly grades for choosen group and subject")
+        print("8. Exit")
 
         # Prompt user for their choice
         choice = input("Enter your choice: ")
@@ -226,19 +314,8 @@ def main():
             last_name = input("Enter the last name of the student: ").capitalize()
             try:
                 result = search_student(first_name, last_name, df_students)
-                type_of_info = input("What type of information do you want ('main ' or 'grades')?: ").lower()
-                if type_of_info == 'main':
-                    print(result[['first_name', 'last_name', 'student_email', 'birth_date', 'city', 'address', 'parent',
-                                  'parent_email']])
-                elif type_of_info == 'grades':
-                    print(
-                        "Subjects: math, physics, chemistry, biology,english, history, geography, literature, sport, it")
-                try:
-                    subjet = input("Enter the name of the subjesct: ").lower()
-                    subjet_cols = [col for col in result.columns if subjet in col]
-                    print(result[subjet_cols])
-                except ValueError:
-                    "Please enter a valid subject name."
+                print(result[['first_name', 'last_name', 'student_email', 'birth_date', 'city', 'address', 'parent',
+                              'parent_email']])
             except ValueError:
                 "Please enter a valid student name."
 
@@ -249,18 +326,19 @@ def main():
             if type_of_info == 'main':
                 print(result[['first_name', 'last_name', 'student_email', 'birth_date', 'city', 'address', 'parent',
                               'parent_email']])
-            elif type_of_info == 'grades':
-                grade_type = input("Which grades do you need? Enter 't1' first term or t2 for second term: ").lower()
-                print("Subjects: math, physics, chemistry, biology,english, history, geography, literature, sport, it")
-            try:
-                subjet = input("Enter the name of the subjesct: ").lower()
-                filter_param = subjet + "_" + grade_type
-                subjet_cols = [col for col in result.columns if filter_param in col]
-                all_cols = ['first_name', 'last_name'] + subjet_cols
-                print(result[all_cols])
-            except ValueError:
-                "Please enter a valid subject name."
-        elif choice == "5":
+        elif choice == '5':
+            group_grades = group_validation()
+            subjet_grades = subject_validation()
+            get_grade_term1(df_students, group_grades, subjet_grades)
+        elif choice == '6':
+            group_grades = group_validation()
+            subjet_grades = subject_validation()
+            get_grade_term2(df_students, group_grades, subjet_grades)
+        elif choice == '7':
+            group_grades = group_validation()
+            subjet_grades = subject_validation()
+            get_grade_yearly(df_students, group_grades, subjet_grades)
+        elif choice == "8":
             print("Exiting...")
             break
         else:
