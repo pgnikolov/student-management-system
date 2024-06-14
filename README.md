@@ -18,15 +18,15 @@ The project is actively undergoing development to enhance user interaction and e
 
 * **Visualization of Student Performance** 👀 (In Progress) 
 
-Actively working on adding functionalities to generate visual plots for student performance analysis. These plots will provide teachers with valuable insights into student development and achievement. Some potential benefits include:
+  Actively working on adding functionalities to generate visual plots for student performance analysis. These plots will provide teachers with valuable insights into student development and achievement. Some potential benefits include:
   
-  - **Overall Class Performance** 🎭: Visualizations can help identify trends and patterns in class performance across different subjects. This can be used to assess the effectiveness of teaching methods and identify areas for improvement.
+    - **Overall Class Performance** 🎭: Visualizations can help identify trends and patterns in class performance across different subjects. This can be used to assess the effectiveness of teaching methods and identify areas for improvement.
   
-  - **Individual Student Performance** 🦸: Visualizations can help track individual student progress over time and identify students who may be excelling in specific subjects or require additional support.
+    - **Individual Student Performance** 🦸: Visualizations can help track individual student progress over time and identify students who may be excelling in specific subjects or require additional support.
     
-  - **Identifying Strengths and Weaknesses** 💪: Visualizations can reveal student strengths and weaknesses in different subjects. This can help teachers tailor their instruction to meet the individual needs of their students.
+    - **Identifying Strengths and Weaknesses** 💪: Visualizations can reveal student strengths and weaknesses in different subjects. This can help teachers tailor their instruction to meet the individual needs of their students.
 
-  - **Early Intervention** 🚑: By identifying students whose performance is declining, visualization tools can help teachers intervene early and provide targeted support.
+    - **Early Intervention** 🚑: By identifying students whose performance is declining, visualization tools can help teachers intervene early and provide targeted support.
 
 * **Potential Visualizations** 🪄
 
@@ -36,7 +36,7 @@ Actively working on adding functionalities to generate visual plots for student 
     
   - Scatter plots ↔️ : These can reveal relationships between different variables, such as grades in different subjects or attendance and performance.
 
-* Missing Student Monitoring: Features to identify and report missing students are also planned for future development.
+* **Missing Student Monitoring** 🙈: Features to identify and report missing students are also planned for future development.
 
 
 ## Getting Started  ⏯️
