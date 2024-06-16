@@ -121,7 +121,7 @@ def subject_validation() -> str:
 
 def yearly_grade_validation() -> int:
     """
-    Prompts the user to enter a student's year in school until a valid year is provided.
+    Prompts the user to enter a year fo grade, until a valid year is provided.
     Valid years are: 1, 2, 3, and 4.
     Returns:
         int: The validated student year entered by the user.
