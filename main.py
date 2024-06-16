@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 from datetime import datetime
 
 pd.set_option('display.max_columns', None)
@@ -118,7 +119,7 @@ def subject_validation() -> str:
     return subject
 
 
-def year_validation() -> int:
+def yearly_grade_validation() -> int:
     """
     Prompts the user to enter a student's year in school until a valid year is provided.
     Valid years are: 1, 2, 3, and 4.
@@ -127,13 +128,32 @@ def year_validation() -> int:
     """
     valid_years = [1, 2, 3, 4]
     while True:
-        year = input("Enter student's year (1, 2, 3, or 4): ")
+        year = input("Enter grade's year (1, 2, 3, or 4): ")
         if year.isdigit() and int(year) in valid_years:
             break
         else:
             print("Invalid year. Please enter '1', '2', '3', or '4'.")
 
     return int(year)
+
+
+def year_validation() -> int:
+    """
+    Prompts the user to enter a student's year in school until a valid year is provided.
+    Valid years are: 0, 1, 2, and 3.
+    Returns:
+        int: The validated student year entered by the user.
+    """
+    valid_years = [0, 1, 2, 3]
+    while True:
+        year = input("Enter student's year (0, 1, 2, or 3): ")
+        if year.isdigit() and int(year) in valid_years:
+            break
+        else:
+            print("Invalid year. Please enter '0', '1', '2', or '3'.")
+
+    return int(year)
+
 
 def get_student_information():
     """
@@ -223,58 +243,145 @@ def validate_date(date_str):
         return False
 
 
-def get_grade_term1(df_students: pd.DataFrame, class_students: str, subject: str, year: int):
+def get_grade_term1(df_students: pd.DataFrame, class_students: str, subject: str, grade_year: int, sch_year: int):
     """
         This function retrieves and prints the grades for a subject in Term 1 for a given class.
      Args:
       df_students (pd.DataFrame): The DataFrame with student information.
       class_students (str): The name of the class (group) to filter students from.
       subject (str): The subject which grades we want.
-      year (int): Year in school of the student
+      grade_year (int): Year of grade
+      sch_year (int): Year student in school
   Returns:
       None: Directly prints the results.
     """
-    subject_to_sort = f'{subject}_year{year}_t1_end'
-    a = df_students[(df_students['group'] == class_students) & (df_students['year_in_school'] == year)]
+    subject_to_sort = f'{subject}_year{grade_year}_t1_end'
+    a = df_students[(df_students['group'] == class_students) & (df_students['year_in_school'] == sch_year)]
     a.reset_index(drop=True, inplace=True)
-    results = (a[['student_first_name', 'student_last_name', subject_to_sort]].sort_values(by=subject_to_sort, ascending=False))
+    results = (a[['student_first_name', 'student_last_name', subject_to_sort]].sort_values(by=subject_to_sort,
+                                                                                           ascending=False))
     print(results.to_string(index=False))
 
 
-def get_grade_term2(df_students: pd.DataFrame, class_students: str, subject: str, year: int):
+def get_grade_term2(df_students: pd.DataFrame, class_students: str, subject: str, grade_year: int, sch_year: int):
     """
         This function retrieves and prints the grades for a subject in Term 2 for a given class.
      Args:
       df_students (pd.DataFrame): The DataFrame with student information.
       class_students (str): The name of the class (group) to filter students from.
       subject (str): The subject which grades we want.
-      year (int): Year in school of the student
+      grade_year (int): Year of grade
+      sch_year (int): Year student in school
   Returns:
       None: Directly prints the results.
     """
-    subject_to_sort = f'{subject}_year{year}_t2_end'
-    a = df_students[(df_students['group'] == class_students) & (df_students['year_in_school'] == year)]
+    subject_to_sort = f'{subject}_year{grade_year}_t2_end'
+    a = df_students[(df_students['group'] == class_students) & (df_students['year_in_school'] == sch_year)]
     a.reset_index(drop=True, inplace=True)
-    results = (a[['student_first_name', 'student_last_name', subject_to_sort]].sort_values(by=subject_to_sort, ascending=False))
+    results = (a[['student_first_name', 'student_last_name', subject_to_sort]].sort_values(by=subject_to_sort,
+                                                                                           ascending=False))
     print(results.to_string(index=False))
 
 
-def get_grade_yearly(df_students: pd.DataFrame, class_students: str, subject: str, year: int):
+def get_grade_yearly(df_students: pd.DataFrame, class_students: str, subject: str, grade_year: int, sch_year: int):
     """
         This function retrieves and prints the yearly grades for a subject and given class.
-     Args:
+    Args:
       df_students (pd.DataFrame): The DataFrame with student information.
       class_students (str): The name of the class (group) to filter students from.
       subject (str): The subject which grades we want.
-      year (int): Year in school of the student
-  Returns:
+      grade_year (int): Year of grade
+      sch_year (int): Year student in school
+    Returns:
       None: Directly prints the results.
   """
-    subject_to_sort = f'{subject}_year{year}'
-    a = df_students[(df_students['group'] == class_students) & (df_students['year_in_school'] == year)]
+    subject_to_sort = f'{subject}_year{grade_year}'
+    a = df_students[(df_students['group'] == class_students) & (df_students['year_in_school'] == sch_year)]
     a.reset_index(drop=True, inplace=True)
-    results = (a[['student_first_name', 'student_last_name', subject_to_sort]].sort_values(by=subject_to_sort, ascending=False))
+    results = (a[['student_first_name', 'student_last_name', subject_to_sort]].sort_values(by=subject_to_sort,
+                                                                                           ascending=False))
     print(results.to_string(index=False))
+
+
+def get_year_data(df: pd.DataFrame, year_in_school: int) -> pd.DataFrame:
+    """
+    Args:
+        df: pd.DataFrame
+        year_in_school: int
+    Return:
+        df: pd.DataFrame
+    """
+    df_year = df[df['year_in_school'] == year_in_school]
+    return df_year
+
+
+def get_group_data(df: pd.DataFrame, year_in_school: int, group: str) -> pd.DataFrame:
+    """
+        Args:
+        df: pd.DataFrame
+        year_in_school: int
+    Return:
+        df: pd.DataFrame
+    """
+
+    df_year = get_year_data(df, year_in_school)
+    df_group = df_year[df_year['group'] == group]
+    return df_group
+
+
+def grade_name(grade):
+    if grade < 3.50:
+        return 'Average'
+    elif 3.50 <= grade < 4.50:
+        return 'Good'
+    elif 4.50 <= grade < 5.50:
+        return 'Very good'
+    else:
+        return 'Excellent'
+
+
+def yearly_grade_dist_subject(df: pd.DataFrame, year_in_school: int, grade_year: int, subject: str):
+    """
+        Generates a pie chart showing the distribution of yearly grades for a specified subject and grade year.
+
+        This function processes the provided DataFrame to filter data for the specified year in school,
+        calculates grade names for the specified subject and grade year, groups the data by grade names and
+        student groups, and then plots pie charts representing the distribution of grades for each student group.
+    Args:
+        df (pd.DataFrame): The DataFrame containing student grades and other information.
+        year_in_school (int): The year in school (0, 1, 2, 3)
+        grade_year (int): The specific grade year within the subject (1, 2, 3, 4).
+        subject (str): The subject for which to analyze and plot the grade distribution (e.g., 'math').
+    Returns:
+        None: The function generates and displays pie charts but does not return any value.
+    """
+    dfyear = get_year_data(df, year_in_school)
+    dfyear = dfyear.dropna(axis=1)
+
+    for col in dfyear.columns:
+        if col.endswith(f'_year{grade_year}'):
+            dfyear[col + '_gn'] = df[col].apply(grade_name)
+
+    group_arg = f'{subject}_year{grade_year}_gn'
+    dfyear_groups = dfyear.groupby(['group', group_arg])
+    groups_count = dfyear_groups.size()
+
+    plt.figure(figsize=(8, 8))
+    plt.suptitle(f"Distribution of {subject.capitalize()} Yearly Grades", fontsize=22)
+    plt.subplot(2, 2, 1)
+    plt.title(f'"A" {subject} Year {grade_year} Grades')
+    plt.pie(groups_count['A'], labels=groups_count['A'].index, autopct='%1.1f%%')
+    plt.subplot(2, 2, 2)
+    plt.title(f'"B" {subject} Year {grade_year} Grades')
+    plt.pie(groups_count['B'], labels=groups_count['B'].index, autopct='%1.1f%%')
+    plt.subplot(2, 2, 3)
+    plt.title(f'"C" {subject} Year {grade_year} Grades')
+    plt.pie(groups_count['C'], labels=groups_count['C'].index, autopct='%1.1f%%')
+    plt.subplot(2, 2, 4)
+    plt.title(f'"D" {subject} Year {grade_year} Grades')
+    plt.pie(groups_count['D'], labels=groups_count['D'].index, autopct='%1.1f%%')
+
+    plt.show()
 
 
 def main():
@@ -295,7 +402,8 @@ def main():
         print("5. List term 1 final grades for chosen group, subject, and year")
         print("6. List term 2 final grades for chosen group, subject, and year")
         print("7. List yearly grades for chosen group, subject, and year")
-        print("8. Exit")
+        print("8. Distribution of Subject Yearly Grades by Groups")
+        print("9. Exit")
 
         # Prompt user for their choice
         choice = input("Enter your choice: ")
@@ -322,8 +430,10 @@ def main():
             last_name = input("Enter the last name of the student: ").capitalize()
             try:
                 result = search_student(first_name, last_name, df_students)
-                print(result[['student_first_name', 'student_last_name', 'student_email', 'birth_date', 'city', 'address', 'parent',
-                              'parent_email']])
+                print(result[
+                          ['student_first_name', 'student_last_name', 'student_email', 'birth_date', 'city', 'address',
+                           'parent',
+                           'parent_email']])
             except ValueError:
                 "Please enter a valid student name."
 
@@ -332,24 +442,34 @@ def main():
             result = list_all_students_by_group(df_students, group_name)
             type_of_info = input("Choose type if info: 'main' or 'grades': ").lower()
             if type_of_info == 'main':
-                print(result[['student_first_name', 'student_last_name', 'student_email', 'birth_date', 'city', 'address', 'parent',
-                              'parent_email']])
+                print(result[
+                          ['student_first_name', 'student_last_name', 'student_email', 'birth_date', 'city', 'address',
+                           'parent',
+                           'parent_email']])
         elif choice == '5':
+            year_in_school = year_validation()
+            grade_year = yearly_grade_validation()
             group_grades = group_validation()
             subject_grades = subject_validation()
-            year_grades = year_validation()
-            get_grade_term1(df_students, group_grades, subject_grades, year_grades)
+            get_grade_term1(df_students, group_grades, subject_grades, grade_year, year_in_school)
         elif choice == '6':
+            year_in_school = year_validation()
+            grade_year = yearly_grade_validation()
             group_grades = group_validation()
             subject_grades = subject_validation()
-            year_grades = year_validation()
-            get_grade_term2(df_students, group_grades, subject_grades, year_grades)
+            get_grade_term2(df_students, group_grades, subject_grades, grade_year, year_in_school)
         elif choice == '7':
+            year_in_school = year_validation()
+            grade_year = yearly_grade_validation()
             group_grades = group_validation()
             subject_grades = subject_validation()
-            year_grades = year_validation()
-            get_grade_yearly(df_students, group_grades, subject_grades, year_grades)
+            get_grade_yearly(df_students, group_grades, subject_grades, grade_year, year_in_school)
         elif choice == "8":
+            year_in_shool = year_validation()
+            grade_year = yearly_grade_validation()
+            subject = subject_validation()
+            yearly_grade_dist_subject(df_students, year_in_shool, grade_year, subject)
+        elif choice == "9":
             print("Exiting...")
             break
         else:
