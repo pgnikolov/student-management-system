@@ -1,6 +1,6 @@
 # Student Management System  📚
 
-<img src="https://github.com/pgnikolov/student-management-system/assets/151896883/66beb7d5-78c3-46a2-a1c7-e4e2b797c43c" width="7200" height="420"/>
+<img src="https://github.com/pgnikolov/student-management-system/assets/151896883/66beb7d5-78c3-46a2-a1c7-e4e2b797c43c" width="720" height="420"/>
 
 Command-line application for managing student records efficiently. It allows users to perform various operations such as adding, updating, deleting, and searching for student information.
 The system is designed to streamline administrative tasks related to student management.
@@ -49,6 +49,7 @@ The project is actively undergoing development to enhance user interaction and e
 You can install the required library using pip:
 ```bash
 pip install pandas
+pip install matplotlib
 ```
 
 ### File Structure 📂
@@ -82,10 +83,11 @@ The main menu provides the following options:
 2. Delete Student: Remove a student record.
 3. Search Student: Search for a student record by name.
 4. List All Students: List all student records.
-5. List term 1 final grades for choosen group and subject
-6. List term 2 final grades for choosen group and subject
-7. List yearly grades for choosen group and subject
-8. Exit: Exit the program.
+5. List term 1 final grades for choosen group and subject.
+6. List term 2 final grades for choosen group and subject.
+7. List yearly grades for choosen group and subject.
+8. Distribution of Subject Yearly Grades by Groups.
+9. Exit: Exit the program.
 
 ##### Add Student 👨‍🎓
 Adds a new student record to the DataFrame.
@@ -239,6 +241,23 @@ first_name last_name  chemistry_year
     Evelyn    Martin             4.0
 
 ```
+
+### DataFrame Functions 🖼️
+
+`get_year_data(df: pd.DataFrame, year_in_school: int) -> pd.DataFrame` - This function filters a DataFrame to return data for a specific year in school.
+
+`get_group_data(df: pd.DataFrame, year_in_school: int, group: str) -> pd.DataFrame` - This function further filters data by both year in school and student group.
+
+`grade_name(grade) -> str` - This function assigns a grade name based on a given numeric grade.
+
+### Data Visualisation Functions 📊
+
+`yearly_grade_dist_subject(df: pd.DataFrame, year_in_school: int, grade_year: int, subject: str) -> None` - This function generates pie charts showing the distribution of yearly grades for a specified subject and grade year. It filters data, calculates grade names, groups the data, and plots pie charts for each student group.
+
+<img src="https://github.com/pgnikolov/student-management-system/assets/151896883/13e53418-646e-4a6c-bb03-de1a32b8be6f"  width="420" height="420"/>
+
+
+
 **Important Notes** :
 
 * These functions directly print the results to the console, displaying students' first name, last name, and the requested grades (Term 1, Term 2, or Yearly) in descending order (highest to lowest).
@@ -257,6 +276,10 @@ first_name last_name  chemistry_year
 - Group Validation 🔡: Prompts the user to enter a student's group until a valid group is provided.
 
 - Subject Validation ✅: Prompts the user to enter a subject name until a valid subject is provided.
+
+- Grade Year Validation 👌: Prompts the user to enter a year fo grade, until a valid year is provided.
+
+- Year Validation 🗓️: Prompts the user to enter a student's year in school until a valid year is provided.
 
 
 ## Contributing 🤝
