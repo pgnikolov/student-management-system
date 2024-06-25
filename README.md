@@ -1,4 +1,4 @@
-# Student Management System  📚
+# School Management System  📚
 
 <img src="https://github.com/pgnikolov/student-management-system/assets/151896883/66beb7d5-78c3-46a2-a1c7-e4e2b797c43c" width="720" height="420"/>
 
