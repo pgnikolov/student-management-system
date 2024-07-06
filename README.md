@@ -1,6 +1,5 @@
 # School Management System  📚
-
-<img src="https://github.com/pgnikolov/student-management-system/assets/151896883/66beb7d5-78c3-46a2-a1c7-e4e2b797c43c" width="720" height="420"/>
+![graduation-7749220_640](https://github.com/pgnikolov/student-management-system/assets/151896883/bc4c0187-2da9-411c-9c1d-8e36f6162f3f)
 
 Command-line application for managing student records efficiently. It allows users to perform various operations such as adding, updating, deleting, and searching for student information.
 The system is designed to streamline administrative tasks related to student management.
